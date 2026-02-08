@@ -2,18 +2,9 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  // GitHub Pages 部署需要设置 base
-  // - 项目站点: https://<user>.github.io/<repo>/  => base: '/<repo>/'
-  // - 用户站点: https://<user>.github.io/        => base: '/'
-  // 这里在 GitHub Actions 环境下自动用仓库名生成 base，本地开发仍为 '/'
-  base: (() => {
-    // 避免引入 Node 类型依赖（@types/node），用 globalThis 读取环境变量
-    const env = (globalThis as any)?.process?.env as Record<string, string | undefined> | undefined
-    const repo = env?.GITHUB_REPOSITORY
-    const repoName = repo?.split('/')[1]
-    const isGA = Boolean(env?.GITHUB_ACTIONS)
-    return isGA ? `/${repoName ?? 'fe-baiyu'}/` : '/'
-  })(),
+  // GitHub Pages 项目站点: https://<user>.github.io/<repo>/  => base: '/<repo>/'
+  // 优先使用 workflow 传入的 VITEPRESS_BASE，保证 CI 构建时链接带正确前缀
+  base: '/fe-baiyu/',
   srcDir: 'src',
   title: "FE-BaiYu",
   description: "FE-BaiYu",
