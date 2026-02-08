@@ -4,7 +4,6 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "fe baiyu",
   base: "/fe-baiyu/",
-  outDir: "./docs",
   description: "fe baiyu",
   themeConfig: {
     outline: { level: [2, 4] },
