@@ -1,0 +1,23 @@
+# dependencies
+node_modules/
+
+# VitePress / Vite caches & build output
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+
+# Vite default cache directories (just in case)
+.vitepress/cache/
+.vitepress/dist/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / editor junk
+.DS_Store
+.idea/
+.vscode/
+
+
