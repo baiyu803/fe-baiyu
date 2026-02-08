@@ -57,7 +57,7 @@ hsl(0, 100%, 50%)
 - `border-collapse` 属性用于设置表格的边框是否被合并为一个单一的边框，取值为 `collapse`
   - 多用于想自定义 table 时，设置单一边框，挺有用的（之前都是用 border 一个个边处理，挺蠢的～）
 
-<img src="../static/a_1_1.jpg" alt="图片描述" width="800" style="display: block; margin: 10px auto;">
+![alt text](../static/a_1_1.jpg)
 
 ### 9、position 定位属性
 
@@ -163,11 +163,11 @@ hsl(0, 100%, 50%)
 - `mask-image` 属性可以创建一个图像遮罩并将其放置在元素上，以部分或完全隐藏元素的某些部分
 - 遮罩图像可以是 PNG、SVG、CSS渐变、SVG `<mark>` 元素
 
-<img src="../static/a_1_2.jpg" alt="图片描述" width="800" style="display: block; margin: 10px auto;">
+![alt text](../static/a_1_2.jpg)
 
 - 使用渐变
 
-<img src="../static/a_1_3.jpg" alt="图片描述" width="800" style="display: block; margin: 10px auto;">
+![alt text](../static/a_1_3.jpg)
 
 - 该属性谨慎使用，要注意浏览器兼容问题
 

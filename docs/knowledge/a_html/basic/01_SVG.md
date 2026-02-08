@@ -76,7 +76,7 @@
 
 - 看个例子
 
-<img src="../static/a_1_1.jpg" alt="图片描述" width="900" style="display: block; margin: 10px auto;">
+![alt text](../static/a_1_1.jpg)
 
 
 ### 三、SVG 在 HTML 中的使用
@@ -103,7 +103,7 @@ div {
   background-image: url('example.svg');
 }
 ```
-<img src="../static/a_1_2.jpg" alt="图片描述" width="800" style="display: block; margin: 10px auto;">
+![alt text](../static/a_1_2.jpg)
 
 
 ### 四、SVG 滤镜
@@ -111,7 +111,7 @@ div {
 - 滤镜可以应用于 SVG 图形元素，使它们具有特殊的效果。使用 `<filter>` 元素定义滤镜
 - 简单了解，具体使用产看相关文档
 
-<img src="../static/a_1_3.jpg" alt="图片描述" width="800" style="display: block; margin: 10px auto;">
+![alt text](../static/a_1_3.jpg)
 
 ### 五、svg 渐变
 
