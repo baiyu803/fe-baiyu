@@ -3,16 +3,16 @@
 layout: home
 
 hero:
-  name: "My Awesome Project"
-  text: "A VitePress Site"
+  name: "fe baiyu"
+  text: "fe baiyu"
   tagline: My great project tagline
   actions:
     - theme: brand
       text: Markdown Examples
-      link: /examples/markdown/a__HTML/a.1/01.SVG
+      link: /markdown-examples
     - theme: alt
       text: API Examples
-      link: /examples/api
+      link: /api-examples
 
 features:
   - title: Feature A
