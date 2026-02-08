@@ -4,7 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   // GitHub Pages 项目站点: https://<user>.github.io/<repo>/  => base: '/<repo>/'
   // 优先使用 workflow 传入的 VITEPRESS_BASE，保证 CI 构建时链接带正确前缀
-  base: 'fe-baiyu',
+  base: '/fe-baiyu/',
   srcDir: 'src',
   title: "白宇前端",
   description: "FE-BaiYu",
