@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: Markdown Examples
-      link: /examples/markdown/a__HTML/a.基础篇/01.SVG
+      link: /examples/markdown/a__HTML/a.1/01.SVG
     - theme: alt
       text: API Examples
       link: /examples/api

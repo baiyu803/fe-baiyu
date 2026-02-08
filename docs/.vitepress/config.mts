@@ -14,7 +14,7 @@ export default defineConfig({
     return isGA ? `/${repoName ?? 'fe-baiyu'}/` : '/'
   })(),
   srcDir: 'src',
-  title: "FE-BaiYu",
+  title: "白宇前端",
   description: "FE-BaiYu",
   themeConfig: {
     // 右侧“本页目录”（因为你的文档大量使用 ###/####，所以把范围放宽到 2-4 级）
@@ -30,7 +30,7 @@ export default defineConfig({
     nav: [
       { text: 'Home', link: '/' },
       // 默认进入“第一级第一个 md”
-      { text: 'Examples', link: '/examples/markdown/a__HTML/a.基础篇/01.SVG' },
+      { text: 'Examples', link: '/examples/markdown/a__HTML/a.1/01.SVG' },
     ],
 
     // 左侧分级列表（一级/二级均可展开收起）
@@ -44,40 +44,40 @@ export default defineConfig({
               text: '基础篇',
               collapsed: true,
               items: [
-                { text: '01.SVG', link: '/examples/markdown/a__HTML/a.基础篇/01.SVG' }
+                { text: '01.SVG', link: '/examples/markdown/a__HTML/a.1/01.SVG' }
               ]
             },
             {
               text: '提问篇',
               collapsed: true,
               items: [
-                { text: '01.src和href区别src和href区别', link: '/examples/markdown/a__HTML/b.提问篇/01.src和href区别%20copy' },
-                { text: '02.对HTML理解', link: '/examples/markdown/a__HTML/b.提问篇/02.对HTML理解' }
+                { text: '01.src和href区别src和href区别', link: '/examples/markdown/a__HTML/b.1/01.src' },
+                { text: '02.对HTML理解', link: '/examples/markdown/a__HTML/b.1/02.html1' }
               ]
             }
           ]
         },
-        {
-          text: 'CSS',
-          collapsed: true,
-          items: [
-            {
-              text: '基础篇',
-              collapsed: true,
-              items: [
-                { text: '01.SVG', link: '/examples/markdown/b__CSS/a.基础篇/01.SVG' }
-              ]
-            },
-            {
-              text: '提问篇',
-              collapsed: true,
-              items: [
-                { text: '01.src和href区别 copy', link: '/examples/markdown/b__CSS/b.提问篇/01.src和href区别%20copy' },
-                { text: '02.对HTML理解', link: '/examples/markdown/b__CSS/b.提问篇/02.对HTML理解' }
-              ]
-            }
-          ]
-        }
+        // {
+        //   text: 'CSS',
+        //   collapsed: true,
+        //   items: [
+        //     {
+        //       text: '基础篇',
+        //       collapsed: true,
+        //       items: [
+        //         { text: '01.SVG', link: '/examples/markdown/b__CSS/a.基础篇/01.SVG' }
+        //       ]
+        //     },
+        //     {
+        //       text: '提问篇',
+        //       collapsed: true,
+        //       items: [
+        //         { text: '01.src和href区别 copy', link: '/examples/markdown/b__CSS/b.提问篇/01.src和href区别%20copy' },
+        //         { text: '02.对HTML理解', link: '/examples/markdown/b__CSS/b.提问篇/02.对HTML理解' }
+        //       ]
+        //     }
+        //   ]
+        // }
       ],
       '/examples/api/': [
         { text: 'Runtime API Examples', link: '/examples/api' }
