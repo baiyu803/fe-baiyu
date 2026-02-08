@@ -11,7 +11,7 @@ export default defineConfig({
     const repo = env?.GITHUB_REPOSITORY
     const repoName = repo?.split('/')[1]
     const isGA = Boolean(env?.GITHUB_ACTIONS)
-    console.log('env ====>', env);
+    console.log('env ====>', env, window.location.href);
     return isGA ? `/${repoName ?? 'fe-baiyu'}/` : '/'
   })(),
   srcDir: 'src',
