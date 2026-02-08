@@ -4,7 +4,15 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   // GitHub Pages 项目站点: https://<user>.github.io/<repo>/  => base: '/<repo>/'
   // 优先使用 workflow 传入的 VITEPRESS_BASE，保证 CI 构建时链接带正确前缀
-  base: '/fe-baiyu/',
+  base: (() => {
+    const env = (typeof process !== 'undefined' && process?.env) || (globalThis as any)?.process?.env as Record<string, string | undefined> | undefined
+    const fromCI = env?.VITEPRESS_BASE
+    if (fromCI) return fromCI.startsWith('/') ? fromCI : `/${fromCI}`
+    const repo = env?.GITHUB_REPOSITORY
+    const repoName = repo?.split('/')[1]
+    const isGA = Boolean(env?.GITHUB_ACTIONS)
+    return isGA ? `/${repoName ?? 'fe-baiyu'}/` : '/'
+  })(),
   srcDir: 'src',
   title: "FE-BaiYu",
   description: "FE-BaiYu",
