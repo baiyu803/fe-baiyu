@@ -12,7 +12,7 @@ export default defineConfig({
     const repo = env?.GITHUB_REPOSITORY
     const repoName = repo?.split('/')[1]
     const isGA = Boolean(env?.GITHUB_ACTIONS)
-    return isGA ? `/${repoName ?? 'FE-BaiYu'}/` : '/'
+    return isGA ? `/${repoName ?? 'fe-baiyu'}/` : '/'
   })(),
   srcDir: 'src',
   title: "FE-BaiYu",
