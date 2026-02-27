@@ -17,7 +17,8 @@ export default defineConfig({
     },
     nav: [
       { text: '首页', link: '/' },
-      { text: '知识点', link: '/knowledge/introduce' }
+      { text: '知识点', link: '/knowledge/introduce' },
+      { text: '文档笔记', link: '/official-docs/introduce' }
     ],
 
     sidebar: {
@@ -55,6 +56,23 @@ export default defineConfig({
                 { text: '琐碎知识', link: '/knowledge/b_css/basic/01_trivial' }
               ]
             }
+          ]
+        }
+      ],
+      '/official-docs/': [
+        {
+          text: 'Vue3 文档笔记',
+          collapsed: true,
+          items: [
+            { text: '基础', link: '/official-docs/a_vue3/01_basic' },
+            { text: '深入组件', link: '/official-docs/a_vue3/02_deep_component' }
+          ]
+        },
+        {
+          text: 'Pinia 文档笔记',
+          collapsed: true,
+          items: [
+            { text: '待写', link: '/official-docs/b_pinia/txt' }
           ]
         }
       ]
