@@ -6,9 +6,9 @@
 
 - 比如抽离一个鼠标跟踪器实例
 
+::: code-group
 
-```js
-// mouse.js 文件
+```js [mouse.js]
 import { ref, onMounted, onUnmounted } from 'vue'
 
 // 按照惯例，组合式函数名以“use”开头
@@ -32,10 +32,9 @@ export function useMouse() {
   return { x, y }
 }
 ```
-- 在组件中使用
 
 
-```js
+```vue [index.vue]
 <script setup>
 import { useMouse } from './mouse.js'
 
@@ -44,13 +43,15 @@ const { x, y } = useMouse()
 
 <template>Mouse position is at: {{ x }}, {{ y }}</template>
 ```
+:::
 
 - 更强的是，一个组合式函数可以调用一个或多个其他的组合式函数
 
 - 可以将添加和清除 DOM 事件监听器的逻辑也封装进一个组合式函数中
 
+::: code-group
 
-```js
+```js [event.js]
 import { onMounted, onUnmounted } from 'vue'
 
 export function useEventListener(target, event, callback) {
@@ -61,7 +62,8 @@ export function useEventListener(target, event, callback) {
 }
 ```
 
-```js
+```vue [index.vue]
+<script setup>
 import { ref } from 'vue'
 import { useEventListener } from './event'
 
@@ -76,7 +78,9 @@ export function useMouse() {
 
   return { x, y }
 }
+</script>
 ```
+:::
 
 #### 1.2 约定和最佳实践
 
@@ -200,7 +204,7 @@ const vHighlight = {
     el.classList.add('is-highlight')
   }
 }
-</script>
+</>
 
 <template>
   <p v-highlight>This sentence is important!</p>
