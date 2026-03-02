@@ -6,7 +6,7 @@
 
 ##### 1.1.1 同名简写
 
-```js
+```vue
 <!-- 与 :id="id" 相同 -->
 <div :id></div>
 
@@ -30,7 +30,7 @@ const objectOfAttrs = {
 
 ##### 1.2.1 动态参数
 
-```js
+```vue
 <a v-bind:[attributeName]="url"> ... </a>
 <!-- 简写 -->
 <a :[attributeName]="url"> ... </a>
@@ -209,7 +209,7 @@ const alwaysSmall = computed((previous) => {
 
 *   常见的
 
-```js
+```vue
 <div :class="{ active: isActive }"></div>
 <div :class="[isActive ? activeClass : '', 'errorClass']"></div>
 <div :style="{ color: red, fontSize: fontSize + 'px' }"></div>
@@ -241,7 +241,7 @@ const errorClass = ref('text-danger')
 
 *   以使用 `of` 作为分隔符来替代 `in`
 
-```js
+```vue
 <div v-for="item of items"></div>
 ```
 
@@ -263,7 +263,7 @@ const myObject = reactive({
 
 *   事件处理器分为内联事件处理器、方法事件处理器
 
-```js
+```vue
 //内联
 <button @click="count++">Add 1</button>
 <button @click="greet()">Greet</button>
@@ -302,7 +302,7 @@ function warn(message, event) {
 *   `.once`
 *   `.passive`
 
-```js
+```vue
 <!-- 单击事件将停止传递 -->
 <a @click.stop="doThis"></a>
 
