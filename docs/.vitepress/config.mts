@@ -67,7 +67,8 @@ export default defineConfig({
             { text: '基础', link: '/official-docs/a_vue3/01_basic' },
             { text: '深入组件', link: '/official-docs/a_vue3/02_deep_component' },
             { text: '逻辑复用', link: '/official-docs/a_vue3/03_logic_reuse' },
-            { text: '内置组件', link: '/official-docs/a_vue3/04_builtin_component' }
+            { text: '内置组件', link: '/official-docs/a_vue3/04_builtin_component' },
+            { text: 'TypeScript', link: '/official-docs/a_vue3/05_typescript' }
           ]
         },
         {
