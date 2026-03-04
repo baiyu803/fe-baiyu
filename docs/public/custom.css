@@ -59,4 +59,5 @@ html:not(.dark) {
   --vp-code-line-highlight-color: rgba(110, 118, 129, 0.18);
   --vp-code-line-number-color: #8b949e;
   --vp-code-tab-active-text-color: #ffffff;
+  --vp-code-tab-text-color: #e3e3e3;
 }
