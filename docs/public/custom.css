@@ -48,3 +48,14 @@
 .dark .VPHomeHero .image::before {
   background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, rgba(59, 130, 246, 0.15) 40%, transparent 70%);
 }
+
+/* 白天主题下，代码块固定使用黑天风格 */
+html:not(.dark) {
+  --vp-code-block-bg: #0d1117;
+  --vp-code-block-color: #c9d1d9;
+  --vp-code-lang-color: #8b949e;
+  --vp-code-copy-code-bg: #21262d;
+  --vp-code-copy-code-hover-bg: #30363d;
+  --vp-code-line-highlight-color: rgba(110, 118, 129, 0.18);
+  --vp-code-line-number-color: #8b949e;
+}
