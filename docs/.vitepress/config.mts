@@ -82,8 +82,8 @@ export default defineConfig({
           text: 'Vue-Router 文档笔记',
           collapsed: true,
           items: [
-            { text: '基础', link: '/official-docs/b_vue-router/01_basic' },
-            { text: '进阶', link: '/official-docs/b_vue-router/02_advanced'}
+            { text: '基础', link: '/official-docs/b_vue_router/01_basic' },
+            { text: '进阶', link: '/official-docs/b_vue_router/02_advanced'}
           ]
         }
       ]
