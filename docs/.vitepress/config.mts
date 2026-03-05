@@ -79,10 +79,11 @@ export default defineConfig({
           ]
         },
         {
-          text: 'Pinia 文档笔记',
+          text: 'Vue-Router 文档笔记',
           collapsed: true,
           items: [
-            { text: '待写', link: '/official-docs/b_pinia/txt' }
+            { text: '基础', link: '/official-docs/b_vue-router/01_basic' },
+            { text: '进阶', link: '/official-docs/b_vue-router/02_advanced'}
           ]
         }
       ]
