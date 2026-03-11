@@ -85,6 +85,14 @@ export default defineConfig({
             { text: '基础', link: '/official-docs/b_vue_router/01_basic' },
             { text: '进阶', link: '/official-docs/b_vue_router/02_advanced'}
           ]
+        },
+        {
+          text: 'Pinia 文档笔记',
+          collapsed: true,
+          items: [
+            { text: '介绍', link: '/official-docs/c_pinia/01_introduce' },
+            { text: '核心概念', link: '/official-docs/c_pinia/02_core_concept' }
+          ]
         }
       ]
     },
