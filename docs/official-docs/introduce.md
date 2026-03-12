@@ -5,5 +5,7 @@
 - [vue-router 官方文档](https://router.vuejs.org/zh/)
 - [pinia 官方文档](https://pinia.vuejs.org/zh/introduction.html)
 - [typeScript 中文文档](https://typescript.uihtm.com/)
+- [vite 中文文档](https://cn.vite.dev/)
+- [nest.js 中文文档](https://docs.nestjs.cn/)
 
 

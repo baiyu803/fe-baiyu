@@ -93,6 +93,16 @@ export default defineConfig({
             { text: '介绍', link: '/official-docs/c_pinia/01_introduce' },
             { text: '核心概念', link: '/official-docs/c_pinia/02_core_concept' }
           ]
+        },
+        {
+          text: 'TypeScript 文档笔记',
+          collapsed: true,
+          items: [
+            { text: '基础', link: '/official-docs/d_typescript/01_basic' },
+            { text: '类型/对象/模块', link: '/official-docs/d_typescript/02_type_object_module' },
+            { text: '高级进阶', link: '/official-docs/d_typescript/03_advanced' },
+            { text: '声明文件', link: '/official-docs/d_typescript/04_declaration_file' }
+          ]
         }
       ]
     },
