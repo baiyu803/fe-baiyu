@@ -22,7 +22,8 @@ let list: number[] = [1, 2, 3];
 let list2: Array<number> = [1, 2, 3];
 
 // Tuple 元组：元组类型允许表示一个已知元素数量和类型的数组，各元素的类型不必相同。
-let x: [string, number];
+// 可以在元素类型后面添加 ？ 来拥有可选属性，这也会影响 length
+let x: [string, number, bollean?];
 x = ['hello', 10]; // 正确
 // x = [10, 'hello']; // 错误
 
@@ -726,7 +727,7 @@ function loggingIdentity<T extends Lengthwise>(arg: T): T {
 }
 ```
 
-**在泛型约束中使用类型参数**
+#### 8.5在泛型约束中使用类型参数
 
 - 可以声明一个类型参数，且它被另一个类型参数所约束。 比如，现在我们想要用属性名从对象里获取这个属性。 并且我们想要确保这个属性存在于对象obj上，因此我们需要在这两个类型之间使用约束
 
@@ -754,7 +755,25 @@ type P = "x" | "y";
 :::
 
 
+#### 8.6 在泛型中使用类的类型
 
+```ts
+function create<Type>(c: { new (): Type }): Type {  // 构造签名
+  return new c();
+}
+```
+
+#### 8.7 泛型参数默认值
+
+- 泛型也可以直接提供默认值
+```ts
+interface Box<T = string> {  // 默认类型为 string
+  value: T;
+}
+
+let box1: Box = { value: "hello" };      // 使用默认类型 string
+let box2: Box<number> = { value: 42 };  // 明确指定类型 number
+```
 
 
 
