@@ -65,7 +65,28 @@ export default defineConfig({
               text: '基础篇',
               collapsed: true,
               items: [
-                { text: '琐碎知识', link: '/knowledge/b_css/basic/01_trivial' }
+                { text: '琐碎知识', link: '/knowledge/b_css/basic/01_trivial' },
+                { text: '文本', link: '/knowledge/b_css/basic/02_text' },
+                { text: '渐变', link: '/knowledge/b_css/basic/03_gradient' },
+                { text: '转换', link: '/knowledge/b_css/basic/04_transform' },
+                { text: '过渡', link: '/knowledge/b_css/basic/05_transition' },
+                { text: '动画', link: '/knowledge/b_css/basic/06_animation' },
+                { text: 'object-fit/object-position', link: '/knowledge/b_css/basic/07_object_fit_position' },
+                { text: 'flex布局', link: '/knowledge/b_css/basic/08_flex' },
+                { text: 'grid布局概述', link: '/knowledge/b_css/basic/09_grid' },
+                { text: '一些技巧', link: '/knowledge/b_css/basic/10_tips' }
+              ]
+            },
+            {
+              text: '思考篇',
+              collapsed: true,
+              items: [
+                { text: 'css居中方式有哪些', link: '/knowledge/b_css/question/01_center_ways' },
+                { text: '物理像素逻辑像素和像素密度', link: '/knowledge/b_css/question/02_pixel_density' },
+                { text: 'css预处理器后处理器是什么', link: '/knowledge/b_css/question/03_preprocessor_postprocessor' },
+                { text: '对BFC的理解', link: '/knowledge/b_css/question/04_bfc' },
+                { text: '元素的层叠顺序', link: '/knowledge/b_css/question/05_stack_order' },
+                { text: '如何解决1px问题', link: '/knowledge/b_css/question/06_1px_solution' }
               ]
             }
           ]
