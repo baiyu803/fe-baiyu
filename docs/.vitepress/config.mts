@@ -224,6 +224,28 @@ export default defineConfig({
               ]
             },
           ]
+        },
+        {
+          text: '设计模式',
+          collapsed: true,
+          items: [
+            {
+              text: '基础篇',
+              collapsed: true,
+              items: [
+                { text: '前端设计模式', link: '/knowledge/e_designPattern/basic/01_frontend_design_patterns' },
+                { text: '单例模式', link: '/knowledge/e_designPattern/basic/02_singleton_pattern' },
+                { text: '工厂模式', link: '/knowledge/e_designPattern/basic/03_factory_pattern' },
+                { text: '观察者模式与发布订阅模式', link: '/knowledge/e_designPattern/basic/04_observer_pubsub_pattern' },
+                { text: '策略模式', link: '/knowledge/e_designPattern/basic/05_strategy_pattern' },
+                { text: '状态模式', link: '/knowledge/e_designPattern/basic/06_state_pattern' },
+                { text: '迭代器模式', link: '/knowledge/e_designPattern/basic/07_iterator_pattern' },
+                { text: '装饰器模式', link: '/knowledge/e_designPattern/basic/08_decorator_pattern' },
+                { text: '适配器模式', link: '/knowledge/e_designPattern/basic/09_adapter_pattern' },
+                { text: '代理模式', link: '/knowledge/e_designPattern/basic/10_proxy_pattern' }
+              ]
+            }
+          ]
         }
       ],
       '/official-docs/': [
