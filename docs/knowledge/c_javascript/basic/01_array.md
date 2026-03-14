@@ -1,0 +1,155 @@
+### 一、数组基础
+
+#### 1.1 数组创建
+
+```
+字面量
+构造函数 New Array()
+ES6构造器 Array.of()、Array.from(类数组)
+
+Array.from('abc');                             // ["a", "b", "c"]
+Array.from(new Set(['abc', 'def']));           // ["abc", "def"]
+Array.from(new Map([[1, 'ab'], [2, 'de']]));   // [[1, 'ab'], [2, 'de']]
+```
+
+#### 1.2 数组判断
+
+```
+Array.isArray(obj)
+Object.prototype.toString.call(obj)
+obj instanceof Array
+```
+
+### 二、数组方法
+
+---
+
+- 改变原数组的方法： `push、pop、shift、unshift、splice、sort、reverse、fill`
+
+```js
+//array.fill(value, start, end)
+
+const arr = [0, 0, 0, 0, 0];
+arr.fill(5, 1, 3);  // [0, 5, 5, 0, 0]
+arr.fill(0);  // 重置
+```
+---
+
+- 不改变原数组的方法： `concat、slice、join、toString、indexOf、lastIndexOf、includes、find、findIndex、forEach、map、filter、some、every、reduce、reduceRight`
+
+```js
+let colors = ["red", "blue", "green"];  
+console.log(colors.toString())  // red,blue,green
+```
+```js
+let array = [1, 2, 3];
+let array2 = array.concat(4, [5, 6], [7, 8, 9]);
+console.log(array2); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+console.log(array);  // [1, 2, 3], 可见原数组并未被修改
+
+// concat 可用于数组扁平化
+```
+```
+forEach()方法：会针对每一个元素执行提供的函数，对数据的操作会改变原数组，该方法没有返回值；
+
+map()方法：不会改变原数组的值，返回一个新数组，新数组中的值为原数组调用函数处理之后的值；
+```
+---
+- 其他方法：`for...in、for...of、flat()`
+
+```
+for…of 遍历获取的是对象的键值，for…in 获取的是对象的键名；
+for… in 会遍历对象的整个原型链，性能非常差不推荐使用，而 for … of 只遍历当前对象不会遍历原型链；
+对于数组的遍历，for…in 会返回数组中所有可枚举的属性(包括原型链上可枚举的属性)，for…of 只返回数组的下标对应的属性值；
+```
+```
+flat()方法用于创建并返回一个新数组
+
+[1, [2, 3]].flat()   // [1, 2, 3]
+[1, [2, [3, 4]]].flat()   // [1, 2, [3, 4]]
+[1, [2, [3, 4]]].flat(2)   // [1, 2, 3, 4]
+```
+
+### 三、类数组对象
+
+类数组时和数组比较类似，但是不能直接调用数组的方法，但是可以使用索引取值和 `length` 属性
+
+```
+常见的类数组对象：
+
+函数里面的参数对象 arguments
+用 getElementsByTagName/ClassName/Name 获得的 HTMLCollection
+用 querySelectorAll 获得的 NodeList （特别，虽然不能用数组方法，但是可以 for...of 迭代）
+```
+
+---
+- 类数组转为数组
+
+```js
+//借用数组方法
+Array.prototype.push.call(arrayLike, 'jack', 'lily');
+
+//借用 ES6 方法直接转为数组
+Array.from(arrayLike);
+扩展运算符 [...arrayLike]
+```
+
+### 四、数组常见操作
+
+#### 4.1 数组扁平化
+
+- 递归实现
+
+```js 
+let arr = [1, [2, [3, 4, 5]]];
+function flatten(arr) {
+  let result = [];
+
+  for(let i = 0; i < arr.length; i++) {
+    if(Array.isArray(arr[i])) {
+      result = result.concat(flatten(arr[i]));
+    } else {
+      result.push(arr[i]);
+    }
+  }
+  return result;
+}
+flatten(arr);  //  [1, 2, 3, 4，5]
+```
+- 扩展运算符实现
+- reduce 实现
+- toString 和 split 实现
+
+```js
+let arr = [1, [2, [3, 4, 5]]];
+arr.toString().split(','); // ['1', '2', '3', '4', '5']
+```
+
+- ES6 flat 实现
+
+```js
+// 层数不确定，参数可以传进 Infinity，代表不论多少层都要展开
+let arr = [1, [2, [3, 4, 5]]];
+arr.flat(Infinity);  // [1, 2, 3, 4，5]
+```
+
+- 正则和 JSON 方法
+
+#### 4.2 数组去重
+
+- Set 实现
+
+```js
+const array = [1, 2, 3, 5, 1, 5, 9, 1, 2, 8];
+Array.from(new Set(array)); // [1, 2, 3, 5, 9, 8]
+```
+
+- map 实现，借助 map 的 key 唯一性
+
+— reduce 实现
+
+#### 4.3 数组求和
+
+- reduce 实现
+- for 循环实现
+- 递归实现

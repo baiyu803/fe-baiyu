@@ -90,6 +90,76 @@ export default defineConfig({
               ]
             }
           ]
+        },
+        {
+          text: 'JavaScript',
+          collapsed: true,
+          items: [
+            {
+              text: '基础篇',
+              collapsed: true,
+              items: [
+                { text: '数组', link: '/knowledge/c_javascript/basic/01_array' },
+                { text: 'JSON', link: '/knowledge/c_javascript/basic/02_json' },
+                { text: '字符串', link: '/knowledge/c_javascript/basic/03_string' },
+                { text: '操作符', link: '/knowledge/c_javascript/basic/04_operator' },
+                { text: '数据类型', link: '/knowledge/c_javascript/basic/05_data_types' },
+                { text: '类型转换', link: '/knowledge/c_javascript/basic/06_type_conversion' },
+                { text: '循环遍历', link: '/knowledge/c_javascript/basic/07_loops_iteration' },
+                { text: '错误类型', link: '/knowledge/c_javascript/basic/08_error_types' },
+                { text: '深浅拷贝', link: '/knowledge/c_javascript/basic/09_deep_shallow_copy' },
+                { text: '解构赋值', link: '/knowledge/c_javascript/basic/10_destructuring_assignment' },
+                { text: '变量提升', link: '/knowledge/c_javascript/basic/11_hoisting' },
+                { text: '对象不变性', link: '/knowledge/c_javascript/basic/12_object_immutability' },
+                { text: '正则表达式', link: '/knowledge/c_javascript/basic/13_regexp' },
+                { text: 'ES6_ES13', link: '/knowledge/c_javascript/basic/14_es6_es13' }
+              ]
+            },
+            {
+              text: '进阶篇',
+              collapsed: true,
+              items: [
+                { text: 'this', link: '/knowledge/c_javascript/advanced/01_this' },
+                { text: '闭包', link: '/knowledge/c_javascript/advanced/02_closure' },
+                { text: '二进制', link: '/knowledge/c_javascript/advanced/03_binary' },
+                { text: '日期时间', link: '/knowledge/c_javascript/advanced/04_datetime' },
+                { text: '字符编码', link: '/knowledge/c_javascript/advanced/05_character_encoding' },
+                { text: '错误处理', link: '/knowledge/c_javascript/advanced/06_error_handling' },
+                { text: '内存泄漏', link: '/knowledge/c_javascript/advanced/07_memory_leak' },
+                { text: '异步编程', link: '/knowledge/c_javascript/advanced/08_async_programming' },
+                { text: '事件循环', link: '/knowledge/c_javascript/advanced/09_event_loop' },
+                { text: '竞态条件', link: '/knowledge/c_javascript/advanced/10_race_condition' },
+                { text: '前端模块化', link: '/knowledge/c_javascript/advanced/11_frontend_modularization' },
+                { text: 'V8执行原理', link: '/knowledge/c_javascript/advanced/12_v8_execution_principle' },
+                { text: '迭代器&生成器', link: '/knowledge/c_javascript/advanced/13_iterator_generator' },
+                { text: 'Web_Workers', link: '/knowledge/c_javascript/advanced/14_web_workers' },
+                { text: 'Proxy', link: '/knowledge/c_javascript/advanced/15_proxy' },
+                { text: 'Object.defineProperty', link: '/knowledge/c_javascript/advanced/16_object_defineproperty' }
+              ]
+            },
+            {
+              text: '思考篇',
+              collapsed: true,
+              items: [
+                { text: '如何判断一个对象是空对象', link: '/knowledge/c_javascript/question/01_empty_object_check' },
+                { text: 'new操作符的实现原理', link: '/knowledge/c_javascript/question/02_new_operator_principle' },
+                { text: 'map和weakMap的区别', link: '/knowledge/c_javascript/question/03_map_vs_weakmap' },
+                { text: 'JavaScript脚本延迟加载方式有哪些', link: '/knowledge/c_javascript/question/04_script_defer_load' },
+                { text: '对Ajax的理解_实现一个Ajax请求', link: '/knowledge/c_javascript/question/05_ajax_understanding' },
+                { text: '什么是尾调用', link: '/knowledge/c_javascript/question/06_tail_call' },
+                { text: '常见的DOM操作有哪些', link: '/knowledge/c_javascript/question/07_common_dom_operations' },
+                { text: 'ajax_axios_fetch的区别', link: '/knowledge/c_javascript/question/08_ajax_axios_fetch' },
+                { text: 'addEventListener方法的参数和使用', link: '/knowledge/c_javascript/question/09_add_event_listener' },
+                { text: '谈谈对原型与原型链的理解', link: '/knowledge/c_javascript/question/10_prototype_chain' },
+                { text: '实现call_apply_bind函数', link: '/knowledge/c_javascript/question/11_call_apply_bind' },
+                { text: '对象创建的方式有哪些', link: '/knowledge/c_javascript/question/12_object_creation_ways' },
+                { text: '对象继承的方式有哪些', link: '/knowledge/c_javascript/question/13_object_inheritance_ways' },
+                { text: '对requestAnimationframe的理解', link: '/knowledge/c_javascript/question/14_request_animation_frame' },
+                { text: '如何判断元素是否到达可视区域', link: '/knowledge/c_javascript/question/15_element_in_viewport' },
+                { text: '谈谈任务的执行顺序', link: '/knowledge/c_javascript/question/16_task_execution_order' }
+              ]
+            }
+          ]
         }
       ],
       '/official-docs/': [
