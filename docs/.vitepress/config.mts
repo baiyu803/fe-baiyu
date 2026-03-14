@@ -284,6 +284,23 @@ export default defineConfig({
               ]
             }
           ]
+        },
+        {
+          text: '计算机网络',
+          collapsed: true,
+          items: [
+            {
+              text: '基础篇',
+              collapsed: true,
+              items: [
+                { text: 'DNS', link: '/knowledge/h_computerNetwork/basic/01_dns' },
+                { text: '网络模型', link: '/knowledge/h_computerNetwork/basic/02_network_models' },
+                { text: 'UDP与TCP', link: '/knowledge/h_computerNetwork/basic/03_udp_tcp' },
+                { text: 'HTTP', link: '/knowledge/h_computerNetwork/basic/04_http' },
+                { text: 'HTTPS', link: '/knowledge/h_computerNetwork/basic/05_https' }
+              ]
+            }
+          ]
         }
       ],
       '/official-docs/': [
