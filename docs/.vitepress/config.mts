@@ -246,6 +246,27 @@ export default defineConfig({
               ]
             }
           ]
+        },
+        {
+          text: '前端工程化',
+          collapsed: true,
+          items: [
+            {
+              text: '基础篇',
+              collapsed: true,
+              items: [
+                { text: 'webpack基础讲解', link: '/knowledge/f_feEngineering/basic/01_webpack_basic' },
+                { text: 'sourceMap基础讲解', link: '/knowledge/f_feEngineering/basic/02_sourcemap_basic' },
+                { text: 'webpack性能优化(上)', link: '/knowledge/f_feEngineering/basic/03_webpack_performance_1' },
+                { text: 'webpack性能优化(下)', link: '/knowledge/f_feEngineering/basic/04_webpack_performance_2' },
+                { text: 'webpack之loader讲解', link: '/knowledge/f_feEngineering/basic/05_webpack_loader' },
+                { text: 'webpack之插件讲解', link: '/knowledge/f_feEngineering/basic/06_webpack_plugin' },
+                { text: '快速自动化构建工具Gulp', link: '/knowledge/f_feEngineering/basic/07_gulp_basic' },
+                { text: 'rollup基本使用', link: '/knowledge/f_feEngineering/basic/08_rollup_basic' },
+                { text: 'vite基本使用', link: '/knowledge/f_feEngineering/basic/09_vite_basic' }
+              ]
+            }
+          ]
         }
       ],
       '/official-docs/': [
