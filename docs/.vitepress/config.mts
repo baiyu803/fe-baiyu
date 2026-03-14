@@ -24,6 +24,7 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '知识点', link: '/knowledge/introduce' },
+      { text: '项目经验', link: '/project-experience/introduce' },
       { text: '文档笔记', link: '/official-docs/introduce' }
     ],
 
@@ -226,6 +227,19 @@ export default defineConfig({
           ]
         },
         {
+          text: 'react',
+          collapsed: true,
+          items: [
+            {
+              text: '基础篇',
+              collapsed: true,
+              items: [
+                { text: '待更新', link: '/knowledge/e_react/basic/01_text' },
+              ]
+            }
+          ]
+        },
+        {
           text: '设计模式',
           collapsed: true,
           items: [
@@ -233,16 +247,16 @@ export default defineConfig({
               text: '基础篇',
               collapsed: true,
               items: [
-                { text: '前端设计模式', link: '/knowledge/e_designPattern/basic/01_frontend_design_patterns' },
-                { text: '单例模式', link: '/knowledge/e_designPattern/basic/02_singleton_pattern' },
-                { text: '工厂模式', link: '/knowledge/e_designPattern/basic/03_factory_pattern' },
-                { text: '观察者模式与发布订阅模式', link: '/knowledge/e_designPattern/basic/04_observer_pubsub_pattern' },
-                { text: '策略模式', link: '/knowledge/e_designPattern/basic/05_strategy_pattern' },
-                { text: '状态模式', link: '/knowledge/e_designPattern/basic/06_state_pattern' },
-                { text: '迭代器模式', link: '/knowledge/e_designPattern/basic/07_iterator_pattern' },
-                { text: '装饰器模式', link: '/knowledge/e_designPattern/basic/08_decorator_pattern' },
-                { text: '适配器模式', link: '/knowledge/e_designPattern/basic/09_adapter_pattern' },
-                { text: '代理模式', link: '/knowledge/e_designPattern/basic/10_proxy_pattern' }
+                { text: '前端设计模式', link: '/knowledge/f_designPattern/basic/01_frontend_design_patterns' },
+                { text: '单例模式', link: '/knowledge/f_designPattern/basic/02_singleton_pattern' },
+                { text: '工厂模式', link: '/knowledge/f_designPattern/basic/03_factory_pattern' },
+                { text: '观察者模式与发布订阅模式', link: '/knowledge/f_designPattern/basic/04_observer_pubsub_pattern' },
+                { text: '策略模式', link: '/knowledge/f_designPattern/basic/05_strategy_pattern' },
+                { text: '状态模式', link: '/knowledge/f_designPattern/basic/06_state_pattern' },
+                { text: '迭代器模式', link: '/knowledge/f_designPattern/basic/07_iterator_pattern' },
+                { text: '装饰器模式', link: '/knowledge/f_designPattern/basic/08_decorator_pattern' },
+                { text: '适配器模式', link: '/knowledge/f_designPattern/basic/09_adapter_pattern' },
+                { text: '代理模式', link: '/knowledge/f_designPattern/basic/10_proxy_pattern' }
               ]
             }
           ]
@@ -255,15 +269,15 @@ export default defineConfig({
               text: '基础篇',
               collapsed: true,
               items: [
-                { text: 'webpack基础讲解', link: '/knowledge/f_feEngineering/basic/01_webpack_basic' },
-                { text: 'sourceMap基础讲解', link: '/knowledge/f_feEngineering/basic/02_sourcemap_basic' },
-                { text: 'webpack性能优化(上)', link: '/knowledge/f_feEngineering/basic/03_webpack_performance_1' },
-                { text: 'webpack性能优化(下)', link: '/knowledge/f_feEngineering/basic/04_webpack_performance_2' },
-                { text: 'webpack之loader讲解', link: '/knowledge/f_feEngineering/basic/05_webpack_loader' },
-                { text: 'webpack之插件讲解', link: '/knowledge/f_feEngineering/basic/06_webpack_plugin' },
-                { text: '快速自动化构建工具Gulp', link: '/knowledge/f_feEngineering/basic/07_gulp_basic' },
-                { text: 'rollup基本使用', link: '/knowledge/f_feEngineering/basic/08_rollup_basic' },
-                { text: 'vite基本使用', link: '/knowledge/f_feEngineering/basic/09_vite_basic' }
+                { text: 'webpack基础讲解', link: '/knowledge/g_feEngineering/basic/01_webpack_basic' },
+                { text: 'sourceMap基础讲解', link: '/knowledge/g_feEngineering/basic/02_sourcemap_basic' },
+                { text: 'webpack性能优化(上)', link: '/knowledge/g_feEngineering/basic/03_webpack_performance_1' },
+                { text: 'webpack性能优化(下)', link: '/knowledge/g_feEngineering/basic/04_webpack_performance_2' },
+                { text: 'webpack之loader讲解', link: '/knowledge/g_feEngineering/basic/05_webpack_loader' },
+                { text: 'webpack之插件讲解', link: '/knowledge/g_feEngineering/basic/06_webpack_plugin' },
+                { text: '快速自动化构建工具Gulp', link: '/knowledge/g_feEngineering/basic/07_gulp_basic' },
+                { text: 'rollup基本使用', link: '/knowledge/g_feEngineering/basic/08_rollup_basic' },
+                { text: 'vite基本使用', link: '/knowledge/g_feEngineering/basic/09_vite_basic' }
               ]
             }
           ]
@@ -276,11 +290,11 @@ export default defineConfig({
               text: '基础篇',
               collapsed: true,
               items: [
-                { text: '前端安全', link: '/knowledge/g_browserPrinciples/basic/01_frontend_security' },
-                { text: '浏览器存储', link: '/knowledge/g_browserPrinciples/basic/02_browser_storage' },
-                { text: '进程与线程', link: '/knowledge/g_browserPrinciples/basic/03_process_thread' },
-                { text: '同源策略和跨域', link: '/knowledge/g_browserPrinciples/basic/04_same_origin_policy_cors' },
-                { text: '从用户输入URL到页面展示', link: '/knowledge/g_browserPrinciples/basic/05_url_to_page_render' }
+                { text: '前端安全', link: '/knowledge/h_browserPrinciples/basic/01_frontend_security' },
+                { text: '浏览器存储', link: '/knowledge/h_browserPrinciples/basic/02_browser_storage' },
+                { text: '进程与线程', link: '/knowledge/h_browserPrinciples/basic/03_process_thread' },
+                { text: '同源策略和跨域', link: '/knowledge/h_browserPrinciples/basic/04_same_origin_policy_cors' },
+                { text: '从用户输入URL到页面展示', link: '/knowledge/h_browserPrinciples/basic/05_url_to_page_render' }
               ]
             }
           ]
@@ -293,15 +307,19 @@ export default defineConfig({
               text: '基础篇',
               collapsed: true,
               items: [
-                { text: 'DNS', link: '/knowledge/h_computerNetwork/basic/01_dns' },
-                { text: '网络模型', link: '/knowledge/h_computerNetwork/basic/02_network_models' },
-                { text: 'UDP与TCP', link: '/knowledge/h_computerNetwork/basic/03_udp_tcp' },
-                { text: 'HTTP', link: '/knowledge/h_computerNetwork/basic/04_http' },
-                { text: 'HTTPS', link: '/knowledge/h_computerNetwork/basic/05_https' }
+                { text: 'DNS', link: '/knowledge/i_computerNetwork/basic/01_dns' },
+                { text: '网络模型', link: '/knowledge/i_computerNetwork/basic/02_network_models' },
+                { text: 'UDP与TCP', link: '/knowledge/i_computerNetwork/basic/03_udp_tcp' },
+                { text: 'HTTP', link: '/knowledge/i_computerNetwork/basic/04_http' },
+                { text: 'HTTPS', link: '/knowledge/i_computerNetwork/basic/05_https' }
               ]
             }
           ]
         }
+      ],
+      '/project-experience/': [
+        { text: 'WebSocket在前端的简单使用', link: '/project-experience/files/01.websocket' },
+        { text: 'SSE 流在前端的应用', link: '/project-experience/files/02.sse' }
       ],
       '/official-docs/': [
         {

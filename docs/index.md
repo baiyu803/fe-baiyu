@@ -21,5 +21,7 @@ features:
     details: 前端一路走来所学知识
   - title: 项目经验
     details: 从项目开发中提取到的经验和技巧
+  - title: 文档笔记
+    details: 阅读一些官网文档后的笔记
 ---
 
