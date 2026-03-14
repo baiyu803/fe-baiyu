@@ -160,6 +160,70 @@ export default defineConfig({
               ]
             }
           ]
+        },
+        {
+          text: 'Vue',
+          collapsed: true,
+          items: [
+            {
+              text: '基础篇',
+              collapsed: true,
+              items: [
+                { text: 'vue的基本原理', link: '/knowledge/d_vue/basic/01_vue_principle' },
+                { text: '双向数据绑定原理', link: '/knowledge/d_vue/basic/02_two_way_data_binding' },
+                { text: 'MVC和MVVM的区别', link: '/knowledge/d_vue/basic/03_mvc_vs_mvvm' },
+                { text: 'slot插槽', link: '/knowledge/d_vue/basic/04_slot' },
+                { text: '常见的事件修饰符', link: '/knowledge/d_vue/basic/05_event_modifiers' },
+                { text: '怎么实现v-model', link: '/knowledge/d_vue/basic/06_v_model_implementation' },
+                { text: '对keep-alive的理解', link: '/knowledge/d_vue/basic/07_keep_alive' },
+                { text: '对$nextTick的理解', link: '/knowledge/d_vue/basic/08_next_tick' },
+                { text: '单页应用与多页应用的区别', link: '/knowledge/d_vue/basic/09_spa_vs_mpa' },
+                { text: 'template到render的转换过程', link: '/knowledge/d_vue/basic/10_template_to_render' },
+                { text: 'mixin_extends的覆盖逻辑', link: '/knowledge/d_vue/basic/11_mixin_extends' },
+                { text: '自定义指令', link: '/knowledge/d_vue/basic/12_custom_directives' },
+                { text: 'vue是如何收集依赖的', link: '/knowledge/d_vue/basic/13_dependency_collection' },
+                { text: 'assets和static的区别', link: '/knowledge/d_vue/basic/14_assets_vs_static' },
+                { text: '对SSR的理解', link: '/knowledge/d_vue/basic/15_ssr' },
+                { text: 'vue性能优化有哪些', link: '/knowledge/d_vue/basic/16_performance_optimization' },
+                { text: '生命周期', link: '/knowledge/d_vue/basic/17_lifecycle' },
+                { text: '组件通信', link: '/knowledge/d_vue/basic/18_component_communication' }
+              ]
+            },
+            {
+              text: '路由篇',
+              collapsed: true,
+              items: [
+                { text: '实现懒加载', link: '/knowledge/d_vue/router/01_lazy_loading' },
+                { text: '路由的hash和history模式区别', link: '/knowledge/d_vue/router/02_hash_vs_history' },
+                { text: '$route和$router的区别', link: '/knowledge/d_vue/router/03_route_vs_router' },
+                { text: '如何定义动态路由', link: '/knowledge/d_vue/router/04_dynamic_routing' },
+                { text: '导航守卫有哪些', link: '/knowledge/d_vue/router/05_navigation_guards' }
+              ]
+            },
+            {
+              text: '状态管理篇',
+              collapsed: true,
+              items: [
+                { text: 'vuex', link: '/knowledge/d_vue/store/01_vuex' }
+              ]
+            },
+            {
+              text: 'vue3',
+              collapsed: true,
+              items: [
+                { text: 'vue3有哪些更新', link: '/knowledge/d_vue/vue3/01_vue3_updates' },
+                { text: '如何收集依赖的', link: '/knowledge/d_vue/vue3/02_dependency_collection_v3' }
+              ]
+            },
+            {
+              text: '虚拟DOM',
+              collapsed: true,
+              items: [
+                { text: '对虚拟DOM的理解', link: '/knowledge/d_vue/vdom/01_virtual_dom' },
+                { text: '对diff算法的理解', link: '/knowledge/d_vue/vdom/02_diff_algorithm' }
+              ]
+            },
+          ]
         }
       ],
       '/official-docs/': [

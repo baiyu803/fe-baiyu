@@ -1,0 +1,42 @@
+
+### 一、基本原理（完整循环）
+
+![图片描述](../static/a_1_1.png)
+
+- 黄色部分：组件渲染函数，负责生成虚拟 DOM
+- 绿色部分：虚拟 DOM 转化为真实 DOM
+- 蓝色部分：观察者（响应式系统），负责监听数据变化
+- 紫色部分：通过 Object.defineProperty (Vue 2.x) 或 Proxy (Vue 3.x) 实现数据劫持，包含 getter 和 setter
+
+```js
+// src/core/observer/index.js 响应式化过程
+Object.defineProperty(obj, key, {
+    enumerable: true,
+    configurable: true,
+    get: function reactiveGetter() {
+        // ...
+        const value = getter ? getter.call(obj) : val // 如果原本对象拥有getter方法则执行
+        dep.depend()                     // 进行依赖收集，dep.addSub
+        return value
+    },
+    set: function reactiveSetter(newVal) {
+        // ...
+        if (setter) { setter.call(obj, newVal) }    // 如果原本对象拥有setter方法则执行
+        dep.notify()               // 如果发生变更，则通知更新
+    }
+})
+```
+
+### 二、数据流转过程
+
+- 当组件渲染时，会访问数据的 getter
+- getter 被访问时，会将当前属性收集为依赖（Collect as Dependency）
+- 当数据变化时，setter 会被触发
+- setter 触发后会通知（Notify）对应的 Watcher 程序实例（每个组件都有）
+- Watcher 接收到通知后，触发组件的重新渲染（Trigger re-render）
+- 重新渲染会生成新的虚拟 DOM 树
+
+
+
+
+
