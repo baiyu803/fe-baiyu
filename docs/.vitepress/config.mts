@@ -41,12 +41,18 @@ export default defineConfig({
               ]
             },
             {
-              text: '提问篇',
+              text: '思考篇',
               collapsed: true,
               items: [
                 { text: 'src和href区别', link: '/knowledge/a_html/question/01_src_href' },
                 { text: '对HTML语义化的理解', link: '/knowledge/a_html/question/02_html_semantic' },
-                { text: 'doctype的作用', link: '/knowledge/a_html/question/03_doctype' }
+                { text: 'doctype的作用', link: '/knowledge/a_html/question/03_doctype' },
+                { text: '常用的meta标签有哪些', link: '/knowledge/a_html/question/04_meta_tags' },
+                { text: 'HTML5有哪些更新', link: '/knowledge/a_html/question/05_html5_updates' },
+                { text: 'img的srcset属性的作用', link: '/knowledge/a_html/question/06_img_srcset' },
+                { text: 'HTML5的离线存储怎么用', link: '/knowledge/a_html/question/07_html5_offline_storage' },
+                { text: 'iframe有哪些优点和缺点', link: '/knowledge/a_html/question/08_iframe_pros_cons' },
+                { text: '渐进增强和优雅降级之间的区别', link: '/knowledge/a_html/question/09_graceful_degradation_progressive_enhancement' }
               ]
             }
           ]
