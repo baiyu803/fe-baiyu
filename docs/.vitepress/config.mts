@@ -267,6 +267,23 @@ export default defineConfig({
               ]
             }
           ]
+        },
+        {
+          text: '浏览器原理',
+          collapsed: true,
+          items: [
+            {
+              text: '基础篇',
+              collapsed: true,
+              items: [
+                { text: '前端安全', link: '/knowledge/g_browserPrinciples/basic/01_frontend_security' },
+                { text: '浏览器存储', link: '/knowledge/g_browserPrinciples/basic/02_browser_storage' },
+                { text: '进程与线程', link: '/knowledge/g_browserPrinciples/basic/03_process_thread' },
+                { text: '同源策略和跨域', link: '/knowledge/g_browserPrinciples/basic/04_same_origin_policy_cors' },
+                { text: '从用户输入URL到页面展示', link: '/knowledge/g_browserPrinciples/basic/05_url_to_page_render' }
+              ]
+            }
+          ]
         }
       ],
       '/official-docs/': [
