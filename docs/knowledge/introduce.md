@@ -4,13 +4,13 @@
   - HTML（已完成）
   - CSS（已完成）
   - Vue（已完成）
+  - react
   - 前端设计模式（已完成）
   - 前端工程化（已完成）
   - 浏览器原理
   - 计算机网络
   - nodejs
   - TypeScript
-  - react
   - LeetCode
   - 大模型相关
   - 项目开发经验（该目录是一些常用技术总结目录，比如 websocket使用、移动端适配方案 此类知识）
