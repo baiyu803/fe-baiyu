@@ -61,3 +61,10 @@ html:not(.dark) {
   --vp-code-tab-active-text-color: #ffffff;
   --vp-code-tab-text-color: #e3e3e3;
 }
+
+
+.VPSidebarItem.is-active {
+  background-color: #ebf0ff;
+  border-radius: 8px;
+  padding-left: 6px;
+}
