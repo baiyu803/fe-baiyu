@@ -54,4 +54,4 @@ npm install -D vite
 
 *   **灵活的插件 API**：扩展性强，可通过插件集成各种工具和框架。
 
-![alt text转存失败，建议直接上传图片文件](<转存失败，建议直接上传图片文件 ../images/e_1_1.png>)
+![alt text](../images/e_1_1.jpg)
