@@ -359,6 +359,15 @@ export default defineConfig({
             { text: '高级进阶', link: '/official-docs/d_typescript/03_advanced' },
             { text: '声明文件', link: '/official-docs/d_typescript/04_declaration_file' }
           ]
+        },
+        {
+          text: 'Vite 文档笔记',
+          collapsed: true,
+          items: [
+            { text: '开始', link: '/official-docs/e_vite/01_start' },
+            { text: '功能', link: '/official-docs/e_vite/02_features' },
+            { text: '配置', link: '/official-docs/e_vite/03_config' },
+          ]
         }
       ]
     },
