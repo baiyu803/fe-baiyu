@@ -25,7 +25,8 @@ export default defineConfig({
       { text: '首页', link: '/' },
       { text: '知识点', link: '/knowledge/introduce' },
       { text: '项目经验', link: '/project-experience/introduce' },
-      { text: '文档笔记', link: '/official-docs/introduce' }
+      { text: '文档笔记', link: '/official-docs/introduce' },
+      { text: 'AI 相关', link: '/ai-relate/introduce' }
     ],
 
     sidebar: {
@@ -369,6 +370,9 @@ export default defineConfig({
             { text: '配置', link: '/official-docs/e_vite/03_config' },
           ]
         }
+      ],
+      '/ai-relate/': [
+        { text: '待定', link: '/ai/files/01.ai' }
       ]
     },
 

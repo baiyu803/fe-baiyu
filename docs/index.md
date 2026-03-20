@@ -23,5 +23,7 @@ features:
     details: 从项目开发中提取到的经验和技巧
   - title: 文档笔记
     details: 阅读一些官网文档后的笔记
+  - title: AI 相关
+    details: 鞭策自己，拥抱AI吧
 ---
 
