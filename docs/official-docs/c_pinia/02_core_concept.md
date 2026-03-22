@@ -1,8 +1,3 @@
----
-theme: cyanosis
-highlight: vs2015
----
-
 ::: tip
 笔记仅针对在组件的组合式 API 中使用 Pinia
 :::

@@ -1,8 +1,3 @@
----
-theme: cyanosis
-highlight: vs2015
----
-
 
 ### 一、Pinia 是什么
 

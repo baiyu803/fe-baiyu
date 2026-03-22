@@ -1,8 +1,3 @@
----
-theme: cyanosis
-highlight: vs2015
----
-
 ::: info
 本篇笔记是在 [基础笔记](/official-docs/d_typescript/01_basic.html) 的基础上做补充。主要是围绕类型、对象、模块展开
 :::

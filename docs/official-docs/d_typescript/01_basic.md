@@ -1,8 +1,3 @@
----
-theme: cyanosis
-highlight: vs2015
----
-
 ### 一、基础类型
 
 TypeScript 支持与 JavaScript 几乎相同的数据类型，此外还提供了实用的枚举、元组等类型。
