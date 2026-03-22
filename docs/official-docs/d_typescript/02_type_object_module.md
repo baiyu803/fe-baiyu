@@ -132,7 +132,6 @@ function fn(ctor: SomeConstructor) {
 
 ```ts
 type GreetFunction = (name: string) => string;
-```ts
 ```
 
 - 调用签名
@@ -218,7 +217,7 @@ type I3 = Person[AliveOrName];      // type I3 = string | boolean
 
 #### 6.5 条件类型
 
--条件类型类似于 js 中的条件表达式（条件 ? true 表达式 : false 表达式）。一般和泛型一起使用，不然就有些单调无用
+- 条件类型类似于 js 中的条件表达式（条件 ? true 表达式 : false 表达式）。一般和泛型一起使用，不然就有些单调无用
 
 
 ```ts
