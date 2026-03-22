@@ -439,7 +439,10 @@ class Greeter {
   }
 }
 
+// 错误提示 应有 2 个参数，但获得 1 个
 let greeter = new Greeter('world');
+
+let greeter = new Greeter('world', 10);
 ```
 
 - 除了单独拿出来声明外，还有简写形式，也就是参数属性写法
