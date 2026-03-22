@@ -150,7 +150,30 @@ mySearch = function(src: string, sub: string): boolean {
   let result = src.search(sub);
   return result > -1;
 }
+
+// 或者使用箭头函数
+mySearch = (src: string, sub: string): boolean => {
+  let result = src.search(sub);
+  return result > -1;
+}
 ```
+
+::: tip
+- 留意一个事情，上面的接口定义了一个函数类型，而不是一个对象类型。可以和下面的对象类型作对比：
+```ts
+// 重新定义接口，将函数作为方法
+interface SearchObject {
+  mySearch(source: string, subString: string): boolean;
+}
+
+let mySearchObj: SearchObject = {
+  mySearch: function(src: string, sub: string): boolean {
+    let result = src.search(sub);
+    return result > -1;
+  }
+};
+```
+:::
 
 #### 2.2 可索引类型
 
@@ -258,6 +281,19 @@ let myAdd: (x: number, y?: number) => number = function(x: number, y?: number): 
 
 ::: tip
 函数和返回值类型之间使用 `=>` 符号，返回值是函数类型的必要成分，即使函数没有返回值，也要写 `void`
+
+```ts
+// 正确 ✅
+let fn1: (a: string) => number;
+let fn2: { (a: string): number };  // 对象类型签名也可以
+
+// 错误 ❌
+let fn3: (a: string): number;  // 语法错误
+```
+
+- `=>` 用于类型层面（描述函数类型）
+
+- `:` 用于值层面（实际函数的返回类型）
 :::
 
 #### 3.1 推断类型
@@ -537,7 +573,7 @@ dad.name = 'Man with the 3-piece suit'; // 错误! name 是只读的.
 const fullNameMaxLength = 10;
 
 class Employee {
-  private _fullName: string;
+  private _fullName: string = '';
 
   get fullName(): string {
     return this._fullName;
@@ -721,8 +757,33 @@ let myIdentity: GenericIdentityFn<number> = identity;
 
 - 第一版和第二版的区别是：第一版是接口中有泛型，第二版是整个接口是泛型。第一版调用时指定类型，第二版声明时指定类型。
 
+#### 8.3 泛型类型别名
 
-#### 8.3 泛型类
+```ts
+type GenericIdentityFn<T> = (arg: T) => T;
+
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+let myIdentity: GenericIdentityFn<number> = identity;
+
+// 联合类型
+type Status<T> = T | string;
+
+// 元组类型
+type Pair<T, U> = [T, U];
+
+// 条件类型
+type NonNullable<T> = T extends null | undefined ? never : T;
+
+// 映射类型
+type Readonly<T> = {
+  readonly [P in keyof T]: T[P];
+};
+```
+
+#### 8.4 泛型类
 
 - 泛型类看上去与泛型接口差不多。 泛型类使用 `<>` 括起泛型类型，跟在类名后面
 
@@ -739,7 +800,7 @@ myGenericNumber.add = function (x, y) {
 };
 ```
 
-#### 8.4 泛型约束
+#### 8.5 泛型约束
 
 - 先看一个例子
 
@@ -750,7 +811,7 @@ function loggingIdentity<T>(arg: T): T {
 }
 ```
 
-- - 因为 T 可以是任意类型，所以不保证有 length 属性，需要添加泛型约束
+- 因为 T 可以是任意类型，所以不保证有 length 属性，需要添加泛型约束
 
 ```ts
 interface Lengthwise {
@@ -763,7 +824,7 @@ function loggingIdentity<T extends Lengthwise>(arg: T): T {
 }
 ```
 
-#### 8.5在泛型约束中使用类型参数
+#### 8.6 在泛型约束中使用类型参数
 
 - 可以声明一个类型参数，且它被另一个类型参数所约束。 比如，现在我们想要用属性名从对象里获取这个属性。 并且我们想要确保这个属性存在于对象obj上，因此我们需要在这两个类型之间使用约束
 
@@ -791,7 +852,7 @@ type P = "x" | "y";
 :::
 
 
-#### 8.6 在泛型中使用类的类型
+#### 8.7 在泛型中使用类的类型
 
 ```ts
 function create<Type>(c: { new (): Type }): Type {  // 构造签名
@@ -799,7 +860,7 @@ function create<Type>(c: { new (): Type }): Type {  // 构造签名
 }
 ```
 
-#### 8.7 泛型参数默认值
+#### 8.8 泛型参数默认值
 
 - 泛型也可以直接提供默认值
 ```ts
