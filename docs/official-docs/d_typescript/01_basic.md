@@ -78,6 +78,22 @@ if (typeof unknownValue === "number") {
   let n: number = unknownValue; // 合法
 }
 ```
+```ts [null undefined 类型扩展]
+let s = 'foo';
+s = null; // 错误, 'null'不能赋值给'string'
+let sn: string | null = 'bar';
+sn = null; // 可以
+
+sn = undefined; // error, 'undefined'不能赋值给'string | null'
+
+function f(x: number, y?: number) {
+  return x + (y || 0);
+}
+f(1, 2);
+f(1);
+f(1, undefined);
+f(1, null); // error, 'null' is not assignable to 'number | undefined'
+```
 :::
 
 ::: tip
@@ -86,6 +102,9 @@ if (typeof unknownValue === "number") {
 - 枚举类型，默认从 0 开始为元素编号，也可以手动指定成员的数值
 
 - any 和 unknown 都是用来表示类型不确定的值，但 any 类型会绕过类型检查，而 unknown 类型则更安全，需要先进行类型检查才能使用。可以说 unknown 是类型安全的 any
+
+- TypeScript 会把 `null`和 `undefined` 区区别对待。 `string | null`，`string | undefined`和 `string | undefined | null`是不同的类型
+  -  使用了 `--strictNullChecks`，可选参数会被自动地加上`| undefined`
 :::
 
 
