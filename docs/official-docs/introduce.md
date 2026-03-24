@@ -6,6 +6,8 @@
 - [pinia 官方文档](https://pinia.vuejs.org/zh/introduction.html)
 - [typeScript 中文文档](https://typescript.uihtm.com/)
 - [vite 中文文档](https://cn.vite.dev/)
+- [qiankun 中文文档](https://qiankun.umijs.org/zh)
+- [express 中文文档](https://express.nodejs.cn/)
 - [nest.js 中文文档](https://docs.nestjs.cn/)
 
 

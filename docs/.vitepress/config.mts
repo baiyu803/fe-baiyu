@@ -357,7 +357,8 @@ export default defineConfig({
           items: [
             { text: '基础', link: '/official-docs/d_typescript/01_basic' },
             { text: '类型/对象/模块', link: '/official-docs/d_typescript/02_type_object_module' },
-            { text: '高级进阶', link: '/official-docs/d_typescript/03_advanced' },
+            { text: '高级进阶·上', link: '/official-docs/d_typescript/03_advanced_first' },
+            { text: '高级进阶·下', link: '/official-docs/d_typescript/04_advanced_second' },
           ]
         },
         {

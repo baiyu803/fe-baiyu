@@ -1087,6 +1087,65 @@ TypeScript 并非允许所有的合并，目前，类不能与其他类或变量
 
 ### 七、JSX
 
+- 暂时不记录，因为没使用过 JSX，记录也不会，[原文档阅读](https://typescript.uihtm.com/zh/reference/jsx.html)
+
+
+### 八、混入
+
+- 上面声明合并有提到，类不能与其他类合并。但是可以通过混入模拟类的合并
+- 混入的思想是：通过组合多个类的功能到一个类，实现多重继承的效果（ts 类只能继承一个）
+- 先看混入示例
+```ts
+// Disposable Mixin
+class Disposable {
+  isDisposed: boolean;
+  dispose() {
+    this.isDisposed = true;
+  }
+}
+// Activatable Mixin
+class Activatable {
+  isActive: boolean;
+  activate() {
+    this.isActive = true;
+  }
+  deactivate() {
+    this.isActive = false;
+  }
+}
+class SmartObject {
+  constructor() {
+    setInterval(
+      () => console.log(this.isActive + ' : ' + this.isDisposed),
+      500
+    );
+  }
+  interact() {
+    this.activate();
+  }
+}
+interface SmartObject extends Disposable, Activatable {}
+applyMixins(SmartObject, [Disposable, Activatable]);
+let smartObj = new SmartObject();
+setTimeout(() => smartObj.interact(), 1000);
+////////////////////////////////////////
+// In your runtime library somewhere
+////////////////////////////////////////
+function applyMixins(derivedCtor: any, baseCtors: any[]) {
+  baseCtors.forEach(baseCtor => {
+    Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
+      Object.defineProperty(
+        derivedCtor.prototype,
+        name,
+        Object.getOwnPropertyDescriptor(baseCtor.prototype, name)
+      );
+    });
+  });
+}
+```
+
+- 解释下，`interface SmartObject extends Disposable, Activatable {}` 是做类型合并的，相同名称的类和接口是可以实现声明合并的，这样 TypeScript 编译器会认为 SmartObject 类具有 Disposable 和 Activatable 的成员。但它不产生任何 JS 代码，运行时 SmartObject 还是只有自己的方法。所以需要 `applyMixins` 方法，它会将 mixin 类的方法复制到目标类上，这样运行时也能调用这些方法。
+
 
 
 
