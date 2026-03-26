@@ -369,6 +369,13 @@ export default defineConfig({
             { text: '功能', link: '/official-docs/e_vite/02_features' },
             { text: '配置', link: '/official-docs/e_vite/03_config' },
           ]
+        },
+        {
+          text: 'QianKun 文档笔记',
+          collapsed: true,
+          items: [
+            { text: '指南', link: '/official-docs/f_qianKun/01_guide' },
+          ]
         }
       ],
       '/ai-relate/': [
