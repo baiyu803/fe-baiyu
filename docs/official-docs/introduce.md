@@ -7,6 +7,7 @@
 - [typeScript 中文文档](https://typescript.uihtm.com/)
 - [vite 中文文档](https://cn.vite.dev/)
 - [qiankun 中文文档](https://qiankun.umijs.org/zh)
+- [Nodejs 文档笔记](https://nodejs.cn/api/)
 - [express 中文文档](https://express.nodejs.cn/)
 - [nest.js 中文文档](https://docs.nestjs.cn/)
 
