@@ -376,6 +376,26 @@ export default defineConfig({
           items: [
             { text: '指南', link: '/official-docs/f_qianKun/01_guide' },
           ]
+        },
+        {
+          text: 'Nodejs 文档笔记',
+          collapsed: true,
+          items: [
+            { text: '基础', link: '/official-docs/g_nodejs/01_basic' },
+            { text: 'path 模块', link: '/official-docs/g_nodejs/02_path_module' },
+            { text: 'fs 模块', link: '/official-docs/g_nodejs/03_fs_module' },
+            { text: 'http 模块', link: '/official-docs/g_nodejs/04_http_module' },
+            { text: 'https 模块', link: '/official-docs/g_nodejs/05_https_module' },
+            { text: 'url 模块', link: '/official-docs/g_nodejs/06_url_module' },
+            { text: 'events 模块', link: '/official-docs/g_nodejs/07_events_module' },
+            { text: 'process 模块', link: '/official-docs/g_nodejs/08_process_module' },
+            { text: 'os 模块', link: '/official-docs/g_nodejs/09_os_module' },
+            { text: 'crypto 模块', link: '/official-docs/g_nodejs/10_crypto_module' },
+            { text: 'stream 模块', link: '/official-docs/g_nodejs/11_stream_module' },
+            { text: 'buffer 模块', link: '/official-docs/g_nodejs/12_buffer_module' },
+            { text: 'child_process 模块', link: '/official-docs/g_nodejs/13_child_process_module' },
+            { text: 'zlib 模块', link: '/official-docs/g_nodejs/14_zlib_module' },
+          ]
         }
       ],
       '/ai-relate/': [
