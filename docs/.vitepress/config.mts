@@ -396,6 +396,14 @@ export default defineConfig({
             { text: 'child_process 模块', link: '/official-docs/g_nodejs/13_child_process_module' },
             { text: 'zlib 模块', link: '/official-docs/g_nodejs/14_zlib_module' },
           ]
+        },
+        {
+          text: 'Express 文档笔记',
+          collapsed: true,
+          items: [
+            { text: '立即开始', link: '/official-docs/h_express/01_start' },
+            { text: '开发指南', link: '/official-docs/h_express/02_guide' },
+          ]
         }
       ],
       '/ai-relate/': [
