@@ -10,5 +10,7 @@
 - [nodejs 中文文档](https://nodejs.cn/api/)
 - [express 中文文档](https://express.nodejs.cn/)
 - [nest.js 中文文档](https://docs.nestjs.cn/)
+- [react 官方中文文档](https://zh-hans.react.dev/)
+- [next.js 中文文档](https://nextjscn.org/)
 
 
