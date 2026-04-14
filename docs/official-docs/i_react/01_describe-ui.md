@@ -55,7 +55,7 @@ export default function Gallery() {
 ```
 
 *   上面这段代码 非常慢，并且会导致 bug 产生
-    :::
+:::
 
 ::: info
 其实 React 组件就是常规的 JavaScript 函数，除了名字总是以大写字母开头，必须返回 JSX 标签
@@ -106,7 +106,7 @@ export default function App() {
 
     *   一个文件一个组件，使用默认导出
     *   只有工具函数、hooks、公共类型使用具名导出
-        :::
+:::
 
 ### 三、使用 JSX 书写标签语言
 
@@ -144,7 +144,7 @@ export default function App() {
 解释下为什么需要被一个根元素包裹
 
 *   JSX 在底层其实被转换为了 JavaScript 对象，你不能在一个函数中返回多个对象，除非将其变成一个对象，也就是用一个根元素包裹
-    :::
+:::    
 
 ### 四、在 JSX 中通过大括号使用 JavaScript
 
