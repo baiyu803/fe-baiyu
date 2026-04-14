@@ -387,7 +387,7 @@ React 提供了 严格模式，用于检测组件是否是纯粹的
 
     *   树能清晰表达：谁渲染谁、父子关系、数据流向
 
-![alt text](../static/i_1_1.png)
+![alt text](../images/i_1_1.png)
 
 *   渲染树 Render Tree
 
@@ -399,7 +399,7 @@ React 提供了 严格模式，用于检测组件是否是纯粹的
 
         *   叶子组件：位于树底部，没有子组件，但可能会频繁重新渲染
 
-![alt text](../static/i_1_2.png)
+![alt text](../images/i_1_2.png)
 
 *   模块依赖树 Dependency Tree
 
@@ -407,4 +407,4 @@ React 提供了 严格模式，用于检测组件是否是纯粹的
 
     *   作用：主要用于**分析和优化应用打包后的文件大小**
 
-![alt text](../static/i_1_3.png)
+![alt text](../images/i_1_3.png)
