@@ -404,6 +404,16 @@ export default defineConfig({
             { text: '立即开始', link: '/official-docs/h_express/01_start' },
             { text: '开发指南', link: '/official-docs/h_express/02_guide' },
           ]
+        },
+        {
+          text: 'React19 文档笔记',
+          collapsed: true,
+          items: [
+            { text: '描述UI', link: '/official-docs/i_react/01_describe-ui' },
+            { text: '添加交互', link: '/official-docs/i_react/02_add_interaction' },
+            { text: '状态管理', link: '/official-docs/i_react/03_state_management' },
+            { text: '脱围机制', link: '/official-docs/i_react/04_reconciliation_mechanism' },
+          ]
         }
       ],
       '/ai-relate/': [
