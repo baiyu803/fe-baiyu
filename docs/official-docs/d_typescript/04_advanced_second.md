@@ -245,6 +245,17 @@ declare global {
 
 export {};
 ```
+::: tip
+现代 TS 建议
+
+尽量别用 namespace，这是旧时代模块化方案。现在统一用：
+  - ES Module import/export
+  - 顶层直接 export interface/type/class
+
+namespace 只适合：
+  - 老项目兼容
+  - 声明全局第三方库类型（.d.ts）
+:::
 
 
 ### 三、`declare module` 和 `declare namespace` 有什么区别
