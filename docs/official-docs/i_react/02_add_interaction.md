@@ -249,7 +249,7 @@ export default function Counter() {
 看文档时有个疑问，为什么触发了三次 setNumber 设置，怎么不是渲染三次？
 
 *   React 在 onClick /onChange 等合成事件中会开启批量更新，多次调用 state 更新函数不会立即渲染，会等待事件回调执行完成后，合并更新一次
-    :::
+:::
 
 *   但有一种**函数式写法**，可以实现真正的 + 3
 
