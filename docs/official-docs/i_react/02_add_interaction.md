@@ -507,7 +507,7 @@ setArtists(
 
 ```jsx
 setArtists(
-  artistsmap(shape => {
+  artists.map(shape => {
       if (shape.type === 'square') {
         // 不作改变
         return shape;
