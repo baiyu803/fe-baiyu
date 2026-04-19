@@ -639,6 +639,25 @@ function ItemList({ artworks, onToggle }) {
 }
 ```
 
+- 也可以直接使用索引更改
+
+```jsx
+import { useImmer } from 'use-immer';
+
+const [list, setList] = useImmer([
+  { id: 1, name: '张三' },
+  { id: 2, name: '李四' },
+]);
+
+// ✅ 完全正确：直接用索引修改数组
+const updateItem = (index) => {
+  setList((draft) => {
+    // 直接索引赋值！
+    draft[index].name = '修改后的名字';
+  });
+};
+```
+
 ::: tip
-使用 `use-immer` 后，更新函数的 callback 实现的更改逻辑就很想 Vue3 了，方便简洁
+使用 `use-immer` 后，更新函数的 callback 实现的更改逻辑就很像 Vue3 了，方便简洁
 :::
