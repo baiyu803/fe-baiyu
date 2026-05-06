@@ -413,6 +413,7 @@ export default defineConfig({
             { text: '添加交互', link: '/official-docs/i_react/02_add_interaction' },
             { text: '状态管理', link: '/official-docs/i_react/03_state_management' },
             { text: '脱围机制', link: '/official-docs/i_react/04_reconciliation_mechanism' },
+            { text: '参考', link: '/official-docs/i_react/05_reference' },
           ]
         }
       ],
