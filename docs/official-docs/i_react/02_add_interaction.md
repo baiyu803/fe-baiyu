@@ -414,7 +414,7 @@ export default function Form() {
 
 #### 6.2 使用 lmmer 编写简洁的更新逻辑
 
-*   运行 `npm install use-immer` 添加 Immer 依赖
+*   运行 `npm install use-immer` 添加 Immer 依赖 （读 ` /ˈɪmər/`）
 
 *   用 `import { useImmer } from 'use-immer'` 替换掉 `import { useState } from 'react'`
 
