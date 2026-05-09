@@ -329,6 +329,11 @@ function handleAdd() {
 
     - 必要时添加清理函数
 
+- 清理函数的执行时机
+
+	- 组件卸载前
+ 	- 依赖项发生变化时：先执行上一次清理 → 再执行新的副作用	  	
+
 ```jsx
 import { useEffect } from 'react';
 
