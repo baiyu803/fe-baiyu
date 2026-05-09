@@ -519,7 +519,7 @@ function App() {
 - React 19 里的 Hook，使用频率偏低，但有变多趋势。它是“乐观更新”，先假装成功，再等服务器结果
 
 ```jsx
-const [optimisticState, addOptimistic] = useOptimistic(state, updateFn);
+const [optimisticState, addOptimistic] = useOptimistic(state, updateFn?);
 ```
 
 - `optimisticState` 是乐观更新后的 state，`addOptimistic` 是添加乐观更新的函数
