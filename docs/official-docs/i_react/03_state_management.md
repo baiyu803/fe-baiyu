@@ -100,6 +100,27 @@ async function handleSubmit(e) {
   }
 }
 ```
+::: tip
+解释下：
+
+React 会收集一次事件处理代码里的 setXXX 更改，也就是批处理，然后执行下一次渲染（放在一起统一渲染一次）
+
+一般纠结的是，这个统一渲染时机是什么时候 -> **发生在当前事件处理代码跑完之后**
+
+```jsx
+function handleClick() {
+  console.log(count);        // 1. 同步：立即执行
+
+  setCount(count + 1);       // 2. 把更新放入 React 队列
+
+  setTimeout(() => {        // 3. 放入 宏任务队列（最后执行）
+    console.log(count);     // 注意，这里输出的仍是 0
+  }, 0);
+}
+```
+
+这里可能纠结是重新渲染先执行，还是setTimeout的回调先执行。结论是重新渲染先执行。结合上面说的，其实重新渲染任务有点像js里的微任务，但是它不是微任务，只是执行时机有些像
+:::
 
 ### 二、选择 State 结构
 
