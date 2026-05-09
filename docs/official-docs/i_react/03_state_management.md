@@ -502,6 +502,15 @@ export default function TaskApp() {
   const [tasks, dispatch] = useImmerReducer(tasksReducer, initialTasks);
 }
 ```
+::: tip
+useReducer 乍一看只是收拢状态变更逻辑，防止 useState 满天飞，其实有三个好用的地方
+
+- 父组件直接将 dispatch 传递给子组件，实现对父组件状态的变更。不用层层传 setter
+
+- 方便添加日志
+
+- 天然适合 TypeScript 类型约束
+:::
 
 ### 六、使用 Context 深层传递参数
 
