@@ -10,7 +10,7 @@
 - [nodejs 中文文档](https://nodejs.cn/api/)
 - [express 中文文档](https://express.nodejs.cn/)
 - [react19 官方中文文档](https://zh-hans.react.dev/)
-- [react-router 中文文档](https://react-guide.github.io/react-router-cn/)
+- [react-router 中文文档](https://reactrouter.com.cn/home)
 - [redux toolkit 中文文档](https://toolkit.redux.js.cn/)
 - [next.js 中文文档](https://nextjscn.org/)
 - [nest.js 中文文档](https://docs.nestjs.cn/)
