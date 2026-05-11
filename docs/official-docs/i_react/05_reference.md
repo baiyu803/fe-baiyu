@@ -1190,7 +1190,7 @@ createRoot(document.getElementById('root')).render(
 
 #### 7.1 服务器组件
 
-- 定义：服务器组件是一种新型的组件，它在打包之前，在独立于客户端应用程序或 SSR 服务器的环境中提前渲染
+- 定义：服务器组件是一种新型的组件，它在打包之前，在独立于客户端应用程序或 SSR 服务器的环境中提前渲染
   - 服务器组件返回给浏览器时不全是 HTML，而是首屏 HTML + 一份 RSC Payload（React Server Component Payload）
 - 看完官网有些懵逼，所以结论先行，在看实例
 ::: info
@@ -1303,7 +1303,9 @@ async function addToCart(data) {
 }
 ```
 :::
-- 看一个例子
+
+- 看一个例子
+
 ::: code-group
 ```jsx [服务器函数文件]
 // requestUsername.js
