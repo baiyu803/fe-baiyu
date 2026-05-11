@@ -559,7 +559,7 @@ const router = createRouter({
 - 需要服务器端配置支持，确保所有路由都指向同一个 HTML 文件
 
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/aa251a63a18b46be8a670f5c22810014~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5rGC55-l5ZGA:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjY3NDQ3MzQ2MTA4ODYwMCJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1773324310&x-orig-sign=U3gHG%2FpdUUL1I4owmD8T3dbTv8E%3D)
+![image.png](../images/b_1_1.jpg)
 
 
 
