@@ -1186,7 +1186,150 @@ createRoot(document.getElementById('root')).render(
 
 - `hydrateRoot` 是 React 在客户端接管服务端已渲染 HTML 的入口 API，用来复用现有 DOM 并绑定 React 的事件和交互能力，使 SSR 页面变成真正可交互的应用
 
-
+### 七、React 服务器组件
+#### 7.1 服务器组件
+- 定义：服务器组件是一种新型的组件，它在打包之前，在独立于客户端应用程序或 SSR 服务器的环境中提前渲染
+  - 服务器组件返回给浏览器时不全是 HTML，而是首屏 HTML + 一份 RSC Payload（React Server Component Payload）
+- 看完官网有些懵逼，所以结论先行，在看实例
+::: info
+- 它主要用在“既要 React 组件开发体验，又想把一部分渲染和取数放到服务端做”的场景里。两个核心用途：
+  - 一类是在构建时读取静态内容并直接产出结果，避免把大依赖打进前端包
+  - 另一类是在请求时直接访问数据层，在组件里取数据并渲染，减少客户端 useEffect + fetch 带来的二次请求和瀑布问题
+```txt
+你可以把它理解成：
+以前：
+浏览器先加载页面
+再跑 JS
+再 useEffect
+再请求接口
+再 setState 渲染
+用了 Server Components 之后：
+有些组件根本不去浏览器执行
+它们在服务端把数据取好、内容拼好
+浏览器拿到的是“已经算好的 UI 结果”
+只有真正需要交互的部分，才下发到客户端执行
+```
+:::
+- 看官网的一个例子
+::: code-group
+```jsx [未使用服务器组件]
+import marked from 'marked'; // 35.9K (11.2K gzipped)
+import sanitizeHtml from 'sanitize-html'; // 206K (63.3K gzipped)
+function Page({page}) {
+  const [content, setContent] = useState('');
+  // 注意: 在第一次页面渲染 **之后** 加载。
+  useEffect(() => {
+    fetch(`/api/content/${page}`).then((data) => {
+      setContent(data.content);
+    });
+  }, [page]);
+  return <div>{sanitizeHtml(marked(content))}</div>;
+}
+```
+```jsx [使用服务器组件]
+import marked from 'marked'; // 不会包括在 bundle 中
+import sanitizeHtml from 'sanitize-html'; // 不会包括在 bundle 中
+async function Page({page}) {
+  // 注意: 会在应用构建的 **渲染过程中** 加载
+  const content = await file.readFile(`${page}.md`);
+  return <div>{sanitizeHtml(marked(content))}</div>;
+}
+```
+:::
+- 现在有另一个问题，服务器组件更多是渲染展示，那怎么添加交互呢
+  - 由于服务器组件不会发给浏览器，所以它们不能使用交互的 API，例如 useState。要给服务器组件添加交互性，可以使用 `"use client"` 指令把他们和客户端组件组合在一起
+::: code-group
+```jsx [服务器组件]
+import Expandable from './Expandable';
+async function Notes() {
+  const notes = await db.notes.getAll();
+  return (
+    <div>
+      {notes.map(note => (
+        <Expandable key={note.id}>
+          <p note={note} />
+        </Expandable>
+      ))}
+    </div>
+  )
+}
+```
+```jsx [用于客户端的组件]
+"use client"
+export default function Expandable({children}) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div>
+      <button
+        onClick={() => setExpanded(!expanded)}
+      >
+        Toggle
+      </button>
+      {expanded && children}
+    </div>
+  )
+}
+```
+:::
+- 其工作原理是，首先将 Notes 作为服务器组件渲染，然后指引打包器为客户端组件 Expandable 创建一个包。在浏览器中，客户端组件会接收服务器组件的输出并作为 props 传递
+::: tip
+这节内容放在 Next.js App Router 中最好理解
+因为在纯 React 里看 Server Components，容易只看见概念。
+到了 Next.js 里就很具体了：
+- app/page.tsx 默认就是服务器组件
+- 可以直接在组件里 await fetch(...)
+- 需要交互时再写 "use client"
+- 页面、布局、数据获取、首屏渲染串起来就通了
+:::
+#### 7.2 Server Functions
+- 它是让 Client Component 能“调用一个实际运行在服务器上的异步函数”的机制
+- 和 Server Components 不是一回事
+  - Server Components：组件本身在服务端渲染
+  - Server Functions：函数在服务端执行，但可以被客户端触发调用
+- Server Function 通常用 `"use server"` 标记。框架会自动为这个函数创建一个“服务器函数引用”。当客户端里调用它时，React 会发一个请求到服务器，让服务器执行这个函数，并把结果返回回来
+  - 服务器函数可以在服务器组件中，也可以单独文件定义
+::: info
+在异步函数顶部添加 'use server' 以将该函数标记为可由客户端调用。我们将这些函数称为 服务器函数
+```jsx
+async function addToCart(data) {
+  'use server';
+  // ...
+}
+```
+:::
+- 看一个例子
+::: code-group
+```jsx [服务器函数文件]
+// requestUsername.js
+'use server';
+export default async function requestUsername(formData) {
+  const username = formData.get('username');
+  if (canRequest(username)) {
+    // ...
+    return 'successful';
+  }
+  return 'failed';
+}
+```
+```jsx [客户端组件]
+// UsernameForm.js
+'use client';
+import { useActionState } from 'react';
+import requestUsername from './requestUsername';
+function UsernameForm() {
+  const [state, action] = useActionState(requestUsername, null, 'n/a');
+  return (
+    <>
+      <form action={action}>
+        <input type="text" name="username" />
+        <button type="submit">请求</button>
+      </form>
+      <p>最后一次提交的请求的返回值： {returnValue}</p>
+    </>
+  );
+}
+```
+:::
 
 ::: tip
 参考页面还有其他的内容，比如服务端API、React Compiler、React 服务器组件等，有需要即学即用
