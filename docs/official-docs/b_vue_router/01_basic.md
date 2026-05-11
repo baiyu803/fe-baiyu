@@ -383,7 +383,7 @@ const router = createRouter({
   ]
 })
 ```
-::: code-group
+:::
 
 - 当然，也有嵌套命名视图的情况，比如有一个父组件，子组件使用上面配置
 
