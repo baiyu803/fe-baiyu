@@ -99,8 +99,8 @@ const routes = [
 
 | 匹配模式 | 匹配路径 | $route.params |
 | --- | --- | --- |
-| /users/:username | /users/eduardo | { username: 'eduardo' } |
-| /users/:username/posts/:postId | /users/eduardo/posts/123 | { username: 'eduardo', postId: '123' } |
+| /users/:username | /users/eduardo | `{ username: 'eduardo' }` |
+| /users/:username/posts/:postId | /users/eduardo/posts/123 | `{ username: 'eduardo', postId: '123' }` |
 
 #### 2.2 响应路由参数变化
 
