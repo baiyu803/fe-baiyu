@@ -415,6 +415,21 @@ export default defineConfig({
             { text: '脱围机制', link: '/official-docs/i_react/04_reconciliation_mechanism' },
             { text: '参考', link: '/official-docs/i_react/05_reference' },
           ]
+        },
+        {
+          text: 'React-Router 文档笔记',
+          collapsed: true,
+          items: [
+            { text: '前言', link: '/official-docs/j_react_router/01_intro' },
+            { text: '入门', link: '/official-docs/j_react_router/02_basic' },
+            { text: 'Routers', link: '/official-docs/j_react_router/03_routers' },
+            { text: 'Router Components', link: '/official-docs/j_react_router/04_router_components' },
+            { text: 'Router', link: '/official-docs/j_react_router/05_router' },
+            { text: 'Components', link: '/official-docs/j_react_router/06_components' },
+            { text: 'Hooks', link: '/official-docs/j_react_router/07_hooks' },
+            { text: 'Fetch Utilities', link: '/official-docs/j_react_router/08_fetch_utilities' },
+            { text: 'Utilities', link: '/official-docs/j_react_router/09_utilities' },
+          ]
         }
       ],
       '/ai-relate/': [
