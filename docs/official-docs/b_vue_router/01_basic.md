@@ -503,9 +503,63 @@ const props = defineProps({
 
 ### 十、匹配当前路由的链接
 
-- 未看到有用信息，实际业务中也没遇到
+- 主要是讲 RouterLink 组件会为匹配当前路由的链接添加两个 CSS 类，一个是 `router-link-exact-active`，一个是 `router-link-active`
+  - 这两的区别是，一个是精准匹配，一个是匹配
+- 先说 RouterLink 组件匹配路由，看两个条件
+  - 与当前路由路径匹配
+  - 与当前路径的 `params` 相同
+- 可以看到，和 `query` 没有关系
+- 再说下，什么是匹配和精准匹配
+::: code-group
+```js [router.js]
+const routes = [
+  {
+    path: '/user/:username',
+    component: User,
+    children: [
+      {
+        path: 'role/:roleId',
+        component: Role,
+      },
+    ],
+  },
+]
+```
+```vue [app.vue]
+<RouterLink to="/user/erina">
+  User
+</RouterLink>
+<RouterLink to="/user/erina/role/admin">
+  Role
+</RouterLink>
+```
+:::
 
-[点击查看](https://router.vuejs.org/zh/guide/essentials/active-links.html)
+- 如果当前路径是 `/user/erina/role/admin`，则第一个 `RouterLink` 会添加 `router-link-active` 类，第二个 `RouterLink` 会添加 `router-link-active router-link-exact-active` 类。也就是第二个是精准匹配
+
+::: tip
+- 这两个类名也可以通过 RouterLink 组件有两个属性，`activeClass` 和 `exactActiveClass` 来配置
+
+```vue [app.vue]
+<RouterLink to="/user/erina" activeClass="active" exactActiveClass="exact-active">
+  User
+</RouterLink>
+<RouterLink to="/user/erina/role/admin" activeClass="active" exactActiveClass="exact-active">
+  Role
+</RouterLink>
+```
+
+- 默认的类名也可以通过传递 `linkActiveClass` 和 `linkExactActiveClass` 选项给 createRouter() 来全局更改
+
+```js [router.js]
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes: [],
+  linkActiveClass: 'active',
+  linkExactActiveClass: 'exact-active',
+})
+```
+:::
 
 
 ### 十一、不同的历史模式
