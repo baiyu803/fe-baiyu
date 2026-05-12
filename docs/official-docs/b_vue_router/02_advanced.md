@@ -95,7 +95,7 @@ export default {
 - 可以在 beforeRouteLeave 中实现一些表单填写页面的离开保护
 
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/6374eaafe7d247eea9831763bf294128~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5rGC55-l5ZGA:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjY3NDQ3MzQ2MTA4ODYwMCJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1773324320&x-orig-sign=Uag1aZF%2FBd%2F0E2KG0AW1IW2rp8I%3D)
+![image.png](../images/b_2_1.jpg)
 
 
 ### 二、路由元信息
