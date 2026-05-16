@@ -424,7 +424,7 @@ export default defineConfig({
             { text: '入门', link: '/official-docs/j_react_router/02_basic' },
             { text: 'Routers', link: '/official-docs/j_react_router/03_routers' },
             { text: 'Router Components', link: '/official-docs/j_react_router/04_router_components' },
-            { text: 'Router', link: '/official-docs/j_react_router/05_router' },
+            { text: 'Route', link: '/official-docs/j_react_router/05_route' },
             { text: 'Components', link: '/official-docs/j_react_router/06_components' },
             { text: 'Hooks', link: '/official-docs/j_react_router/07_hooks' },
             { text: 'Fetch Utilities', link: '/official-docs/j_react_router/08_fetch_utilities' },
