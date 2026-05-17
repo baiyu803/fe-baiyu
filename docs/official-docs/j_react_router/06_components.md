@@ -198,7 +198,7 @@ import { Link } from 'react-router-dom'
 
     - `route`：相对路由对象
 
-- 加啥当前有个页面是 `/users/123/edit`
+- 例如当前有个页面是 `/users/123/edit`
 
 ```jsx
 <Link to="detail">详情</Link>
@@ -244,7 +244,7 @@ navigate('../', { relative: 'path' })
 let { state } = useLocation();
 ```
 
-### 3.4 replace
+#### 3.4 replace
 
 - 是否替换当前路由，而不是添加到历史记录中
 
@@ -436,6 +436,9 @@ function App() {
   getKey={(location) => location.pathname}
 />
 ```
+
+- 这个 `getKey` 回调函数接受两个参数，一个是 `location`，一个是 `matches`
+
 :::
 
 :star: 方式一 
