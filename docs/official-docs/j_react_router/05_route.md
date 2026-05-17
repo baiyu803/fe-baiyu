@@ -358,7 +358,7 @@ fetcher.submit(data, {
 
     - 路由参数从动态段中解析出来的
 
-    - `request` 是一个发送到路由的 `FetchRequest` 实例。最常见的用例是解析请求中的 `FormData` 数据。FormData 是一个键值对集合，用于表示表单数据
+    - `request` 是一个发送到路由的 `FetchRequest` 实例。最常见的用例是解析请求中的 `formData` 数据。formData 是一个键值对集合，用于表示表单数据
 
 ```js
 <Form method="post">
@@ -476,7 +476,7 @@ function ErrorBoundary() {
 
 ### 四、lazy
 
-- 为了保持应用程序包较小并支持路由的代码分割，每个路由都可以提供一个**异步函数**来解析路由定义中不匹配的部分（loader，，action/ Component，element/ ErrorBoundary，errorElement等等）
+- 为了保持应用程序包较小并支持路由的代码分割，每个路由都可以提供一个**异步函数**来解析路由定义中不匹配的部分（loader，action， Component/element, ErrorBoundary/errorElement 等等）
 
 - 实际例子上面已经给到。现在可以补充一个例子，就是多个路由或者子路由的代码块可以放在一个文件中，然后在路由定义中引入这个文件。
 
@@ -524,7 +524,7 @@ let dashboardRoute = {
 
     - 作用是当路由变化准备重新执行路由的 loader 时，先问一下 shouldRevalidate 是否真的需要重新执行 loader
 
-- 比如路由从 `/users?page=1` 变成 `/users?page=2`，通常会重新执行 loader，因为 URl 变了，数据可能也变了
+- 比如路由从 `/users?page=1` 变成 `/users?page=2`，通常会重新执行 loader，因为 URL 变了，数据可能也变了
 
 - 如果是 `/users?modal=a` 变成 `/users?modal=b`，通常不会重新执行 loader
 
