@@ -5,7 +5,7 @@ export default defineConfig({
   title: "白宇前端",
   base: "/fe-baiyu/",
   description: "一个卷又卷不赢，躺又躺不平的前端人自述",
-  lastUpdated: true
+  lastUpdated: true,
   markdown: {
     theme: {
       light: 'github-dark',
