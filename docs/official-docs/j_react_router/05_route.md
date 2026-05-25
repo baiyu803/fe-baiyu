@@ -556,7 +556,11 @@ let dashboardRoute = {
     - `nextUrl` 下一个路由的 URL
     - `defaultShouldRevalidate` React Router 默认判断结果
 
+::: tip
+**记住一句话**：`Route action` 是“提交修改”，`loader` 是“重新拉最新数据”，`action` 成功后 `React Router` 默认帮你重新跑 `loader`，然后依赖 `useLoaderData` 的组件重新 `render`
 
+在这个过程中，如果 `action` 后，不想执行 `loader`，可以通过 `shouldRevalidate` 手动控制
+:::
 
 
 
