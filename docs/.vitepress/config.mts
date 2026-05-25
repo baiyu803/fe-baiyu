@@ -418,7 +418,7 @@ export default defineConfig({
           ]
         },
         {
-          text: 'React-Router 文档笔记',
+          text: 'React-Router6 文档笔记',
           collapsed: true,
           items: [
             { text: '前言', link: '/official-docs/j_react_router/01_intro' },
