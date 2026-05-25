@@ -42,7 +42,7 @@ const loader = async () => {
 
 
 ```jsx
-return redirect("/otherapp/login", { replace: true });
+return replace("/otherapp/login");
 ```
 
 - 等价于
