@@ -13,6 +13,7 @@
 - [react-router 中文文档](https://reactrouter.com.cn)
 - [redux toolkit 中文文档](https://toolkit.redux.js.cn/)
 - [tanstack query 文档](https://tanstack.com.cn/query/latest)
+- [zustand 中文文档](https://zustand.nodejs.cn/)
 - [next.js 中文文档](https://nextjscn.org/)
 - [nest.js 中文文档](https://docs.nestjs.cn/)
 
