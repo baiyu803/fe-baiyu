@@ -430,6 +430,13 @@ export default defineConfig({
             { text: 'Fetch Utilities', link: '/official-docs/j_react_router/08_fetch_utilities' },
             { text: 'Utilities', link: '/official-docs/j_react_router/09_utilities' },
           ]
+        },
+        {
+          text: 'Nest.js 文档笔记',
+          collapsed: true,
+          items: [
+            { text: '快速入门', link: '/official-docs/o_nestjs/01_quick_start' },
+          ]
         }
       ],
       '/ai-relate/': [
