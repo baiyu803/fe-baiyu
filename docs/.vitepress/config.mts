@@ -320,7 +320,15 @@ export default defineConfig({
       ],
       '/project-experience/': [
         { text: 'WebSocket在前端的简单使用', link: '/project-experience/files/01.webSocket' },
-        { text: 'SSE 流在前端的应用', link: '/project-experience/files/02.sse' }
+        { text: 'SSE 流在前端的应用', link: '/project-experience/files/02.sse' },
+        {
+          text: 'ORM 工具使用',
+          collapsed: true,
+          items: [
+            { text: 'TypeORM 使用', link: '/project-experience/orm_usage/01_typeorm_usage' },
+            { text: 'Prisma 使用', link: '/project-experience/orm_usage/02_prisma_usage'}
+          ]
+        }
       ],
       '/official-docs/': [
         {
