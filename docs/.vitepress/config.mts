@@ -319,8 +319,21 @@ export default defineConfig({
         }
       ],
       '/project-experience/': [
-        { text: 'WebSocket在前端的简单使用', link: '/project-experience/files/01.webSocket' },
-        { text: 'SSE 流在前端的应用', link: '/project-experience/files/02.sse' },
+        {
+          text: '通用经验',
+          collapsed: true,
+          items: [
+            { text: '发布一个 npm 包', link: '/project-experience/general_experience/01_publish_npm_package' },
+          ]
+        },
+        {
+          text: '项目经验',
+          collapsed: true,
+          items: [
+            { text: 'WebSocket在前端的简单使用', link: '/project-experience/project_experience/01.webSocket' },
+            { text: 'SSE 流在前端的应用', link: '/project-experience/project_experience/02.sse' },
+          ]
+        },
         {
           text: 'ORM 工具使用',
           collapsed: true,
