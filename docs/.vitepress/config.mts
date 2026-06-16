@@ -453,6 +453,13 @@ export default defineConfig({
           ]
         },
         {
+          text: 'Zustand 文档笔记',
+          collapsed: true,
+          items: [
+            { text: '快速入门', link: '/official-docs/k_zustand/01_quick_start' },
+          ]
+        },
+        {
           text: 'Nest.js 文档笔记',
           collapsed: true,
           items: [
