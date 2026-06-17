@@ -457,6 +457,9 @@ export default defineConfig({
           collapsed: true,
           items: [
             { text: '快速入门', link: '/official-docs/k_zustand/01_quick_start' },
+            { text: 'Apis', link: '/official-docs/k_zustand/02_apis' },
+            { text: 'Hooks', link: '/official-docs/k_zustand/03_hooks' },
+            { text: '中间件', link: '/official-docs/k_zustand/04_middlewares' },
           ]
         },
         {
