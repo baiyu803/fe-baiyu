@@ -26,6 +26,7 @@ export default defineConfig({
       { text: '知识点', link: '/knowledge/introduce' },
       { text: '项目经验', link: '/project-experience/introduce' },
       { text: '文档笔记', link: '/official-docs/introduce' },
+      { text: '全栈相关', link: '/full-stack/introduce' },
       { text: 'AI 相关', link: '/ai-relate/introduce' }
     ],
 
@@ -467,6 +468,18 @@ export default defineConfig({
           collapsed: true,
           items: [
             { text: '快速入门', link: '/official-docs/o_nestjs/01_quick_start' },
+          ]
+        }
+      ],
+      '/full-stack/': [
+        {
+          text: 'JavaSE 文档笔记',
+          collapsed: true,
+          items: [
+            { text: '前置准备', link: '/full-stack/a_javase/01_basic' },
+            { text: '面向过程编程', link: '/full-stack/a_javase/02_procedure_basic' },
+            { text: '面向对象基础', link: '/full-stack/a_javase/03_object-oriented_basic' },
+            { text: '面向对象高级', link: '/full-stack/a_javase/04_object-oriented_advanced' }
           ]
         }
       ],
