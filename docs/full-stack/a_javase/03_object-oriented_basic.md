@@ -1003,69 +1003,130 @@ interface Study {
 
 #### 4.1 枚举类型
 
+![a_3_16](../images/a_3_16.png)
 
+```java
+public enum Status {   // enum表示这是一个枚举类，枚举类的语法稍微有一些不一样
+    RUNNING, STUDY, SLEEP;    // 直接写每个状态的名字即可，最后面分号可以不打，但是推荐打上
+}
+```
+- 使用
 
+```java
+public class Student extends Person implements Study {
 
+    private Status status;   //状态，可以是跑步、学习、睡觉这三个之中的其中一种
 
+    public Status getStatus() {
+        return status;
+    }
 
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+}
+```
 
+- 这样使用时就有提示了
 
+![a_3_15](../images/a_3_15.png)
 
+- 枚举类型是普通的类，可以给枚举类型添加独有的成员方法
 
+```java
+public enum Status {
+    RUNNING("睡觉"), STUDY("学习"), SLEEP("睡觉");   //无参构造方法被覆盖，创建枚举需要添加参数（本质就是调用的构造方法）
 
+    private final String name;    //枚举的成员变量
+    Status(String name){    //覆盖原有构造方法（默认private，只能内部使用！）
+        this.name = name;
+    }
 
+    public String getName() {   //获取封装的成员变量
+        return name;
+    }
+}
+```
 
+#### 4.2 Java16 记录类型
 
+- 专用于一些保存不可变的数据的类。记录类需要使用 `record` 而非 `class` 关键字声明。
 
+- 记录类型与前面说的枚举类型类似，本质上在编译之后也是一个普通的类，不过是 `final` 且继承自 `java.lang.Record` 抽象类的
 
+- 要为记录类型添加成员变量
 
+```java
+public record Order(int id, String product, String address) {
+}
+```
+![a_3_17](../images/a_3_17.png)
 
+- 然后在使用时，会发现声明的变量本身直接自带了获取内部成员数据的同名方法
 
+![a_3_18](../images/a_3_18.png)
 
+- 记录里可以添加方法，也可以重写方法
 
+```java
+public record TestData(int number, String string) {
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+}
+```
 
+- 它也可以实现接口，但是不能继承
 
+```java
+public record TestData(int number, String string) implements Cloneable {
+}
+```
 
+#### 4.3 Java17 密封类型
 
+- `final` 关键字表示该类不能被继承，只能被实现
 
+  - 无论是谁，包括我们自己也是没办法实现继承的
 
+```java
+public final class A{   //添加final关键字后，不允许对此类继承
+    
+}
+```
 
+- 现在有一个需求，只允许自己写的类继承A，但是不允许别人写的类继承A
 
+  - 可以使用 `sealed` 关键字来实现
 
+```java
+public sealed class A permits B{   
+//在class关键字前添加sealed关键字，表示此类为密封类型，permits后面跟上允许继承的类型，多个子类使用逗号隔开
 
+}
+```
 
+::: tip
+- 密封类型有以下要求：
 
+  - 可以基于普通类、抽象类、接口，也可以是继承自其他接抽象类的子类或是实现其他接口的类等。
 
+  - 必须有子类继承，且不能是匿名内部类或是lambda的形式（这些内容会在下一章介绍）
+  - sealed 关键字写在原来final的位置，但是不能和final、non-sealed关键字同时出现，只能选择其一。
+  - 继承的子类必须显式标记为final、sealed或是non-sealed类型。 
 
+```java
+public sealed class A  permits B{   //指定B继承A
 
+}
+```
+```java
+public final class B extends A {   //在子类final，彻底封死
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
+```
+:::
 
 
 
