@@ -492,10 +492,516 @@ public class Person {
 :::
 
 
+### 三、封装、继承和多态
+
+- 封装、继承和多态是面向对象编程的三大特性
+
+> 封装，把对象的属性和方法结合成一个独立的整体，隐藏实现细节，并提供对外访问的接口。
+
+> 继承，从已知的一个类中派生出一个新的类，叫子类。子类实现了父类所有非私有化的属性和方法，并根据实际需求扩展出新的行为。
+
+> 多态，多个不同的对象对同一消息作出响应，同一消息根据不同的对象而采用各种不同的方法。
+
+#### 3.1 类的封装
+
+- 比如下面，禁止外部直接访问类里面的属性，只能通过方法来访问
+
+```java
+package com.test;
+
+public class Person {
+    private String name;    //现在类的属性只能被自己直接访问
+    private int age;
+    private String sex;
+
+    public Person(String name, int age, String sex) {   //构造方法也要声明为公共，否则对象都构造不了
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+    }
+
+    public String getName() {
+        return name;    //想要知道这个对象的名字，必须通过getName()方法来获取，并且得到的只是名字值，外部无法修改
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+```
+
+- 上面是对外提供方法，也可以将构造方法也私有
+
+```java
+public class Person {
+    private String name;
+    private int age;
+    private String sex;
+
+    private Person(){}   //不允许外部使用new关键字创建对象
+    
+    public static Person getInstance() {   //而是需要使用我们的独特方法来生成对象并返回
+        return new Person();
+    }
+}
+```
+
+- 使用 `Person.getInstance();` 方法来获取单列对象，而不是直接使用 `new Person();`
+
+- 也可以实现单列模式
+
+```java
+public class Test {
+ private static Test instance;
+
+ private Test(){}
+
+ public static Test getInstance() {
+     if(instance == null) 
+         instance = new Test();
+     return instance;
+ }
+}
+```
 
 
+#### 3.2 类的继承
+
+- 在定义不同类的时候存在一些相同属性，为了方便使用可以将这些共同属性抽象成一个**父类**，在定义其他**子类**时可以继承自该父类，减少代码的重复定义
+
+- 子类可以使用父类中非私有的成员属性和方法，也可以重写父类的方法，实现自己的行为
+
+- 想要继承一个类，只需要使用 `extends` 关键字即可
+
+::: code-group
+```java [Main.java]
+import com.test.*;   //使用import关键字导入其他包中的类
+
+public class Main {
+    public static void main(String[] args) {
+        Student student = new Student("李四", 12, "男");   //只有导入之后才可以使用，否则编译器不知道这个类从哪来的
+
+        student.hello();
+
+        Teacher teacher = new Teacher("王五", 26, "女");
+
+        teacher.hello();
+    }
+}
+```
+```java [父类 Person]
+package com.test;
+
+public class Person {
+    protected String name;   //因为子类需要用这些属性，所以说我们就将这些变成protected，外部不允许访问
+    protected int age;
+    protected String sex;
+    protected String profession;
+
+    //构造方法也改成protected，只能子类用
+    protected Person(String name, int age, String sex, String profession) {
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+        this.profession = profession;
+    }
+
+    public void hello(){
+        System.out.println("["+profession+"] 我叫 "+name+"，今年 "+age+" 岁了!");
+    }
+}
+```
+```java [子类 Student]
+package com.test;
+
+public class Student extends Person{
+    public Student(String name, int age, String sex) {    //因为学生职业已经确定，所以说学生直接填写就可以了
+        super(name, age, sex, "学生");   //使用super代表父类，父类的构造方法就是super()
+    }
+
+    public void study(){
+        System.out.println("我的名字是 "+name+"，我在学习！");
+    }
+}
+
+```
+```java [子类 Teacher]
+package com.test;
+
+public class Teacher extends Person {
+    public Teacher(String name, int age, String sex) {    //因为学生职业已经确定，所以说学生直接填写就可以了
+        super(name, age, sex, "老师");   //使用super代表父类，父类的构造方法就是super()
+    }
+
+    public void hello(){
+        System.out.println("我是老师");
+    }
+}
+```
+:::
+
+::: tip
+- 子类继承父类时，如果父类有构造方法，那么子类必须在构造方法中调用 `super()` 方法，否则会报错
+
+- 类的继承可以不断向下，但是同时只能继承一个类，同时，标记为 `final` 的类不允许被继承
+
+```java
+public final class Person {  // class前面添加final关键字表示这个类已经是最终形态，不能继承
+  
+}
+```
+:::
+
+- 在使用子类时，可以将其当做父类来使用
+
+```java
+public static void main(String[] args) {
+    Person person = new Student("小明", 18, "男");    // 这里使用父类类型的变量，去引用一个子类对象（向上转型）
+    person.hello();    // 父类对象的引用相当于当做父类来使用，只能访问父类对象的内容
+}
+```
+
+- 也可以使用强制类型转换，将一个被当做父类使用的子类对象
+
+```java
+public static void main(String[] args) {
+    Person person = new Student("小明", 18, "男");
+    Student student = (Student) person;   //使用强制类型转换（向下转型）
+    student.study();
+}
+```
+
+- 可以通过 `instanceof` 运算符来判断一个对象是否是某个类的实例对象
+
+  - 下面两个都输出，也就是多为 true
+
+```java
+public static void main(String[] args) {
+    Person person = new Student("小明", 18, "男");
+    if(person instanceof Student) {   //我们可以使用instanceof关键字来对类型进行判断
+        System.out.println("对象是 Student 类型的");
+    }
+    if(person instanceof Person) {
+        System.out.println("对象是 Person 类型的");
+    }
+}
+```
+
+::: info
+- 在Java 14，instanceof 迎来了一波小更新
+
+- 新版本在使用 `instanceof` 判断类型成立后，会自动强制转换类型为指定类型，简化了手动转换的步骤
+
+  - 下面的代码在老版本时，一般要先判断类型，再使用对应的方法，但这里直接强制转换后使用了
+
+```java
+private static void test(Person person) {
+    if(person instanceof Student student) {  //直接在instanceof后写变量名称，作为判断成功之后转换的此类型变量名称
+        student.study();
+    }
+}
+```
+:::
+
+::: tip
+- 子类是可以定义和父类同名的属性的
+
+  - 那怎么区分是哪个属性的呢？
+    - 可以使用 `super` 关键字来表示父类，父类的属性就是 `super.属性名`
+
+    - 可以使用 `this` 关键字来表示当前类，当前类的属性就是 `this.属性名`（也可以直接使用属性名，不用 `this.`）
+:::
 
 
+#### 3.3 顶层 Object 类
+
+- 实际上所有类都默认继承自**Object类**，除非手动指定继承的类型，但是依然改变不了最顶层的父类是**Object类**
+
+![a_3_11](../images/a_3_11.png)
+
+- 自动提示的这些方法都来在**Object类**中，是可以直接使用的
+
+
+#### 3.4 方法的重写
+
+- 其实就是子类对父类的方法进行重新实现，实现不同的功能
+
+- 如果不像被重写，可以使用 `final` 关键字来标记这个方法，防止被重写
+
+```java
+public final void exam(){
+    System.out.println("我是考试方法");
+}
+```
+
+- 如果子类重写父类方法后，仍想调用父类原本的方法，可以使用 `super` 关键字来表示父类，父类的方法就是 `super.方法名`
+
+```java
+@Override
+public void exam() {
+    super.exam();   //调用父类的实现
+    System.out.println("我是工人，做题我并不擅长，只能得到 D");
+}
+```
+
+- 对于访问权限的问题，子类在重写父类方法时，不能降低父类方法中的可见性
+
+```java
+public void exam(){
+    System.out.println("我是考试方法");
+}
+```
+![a_3_12](../images/a_3_12.png)
+
+
+#### 3.5 抽象类
+
+- 抽象类比类还要抽象
+
+- 抽象类由于不是具体的类定义（它是类的抽象）可能会存在某些方法没有实现，**因此无法直接通过 new 关键字来直接创建对象**
+
+  - 要使用抽象类，只能去创建它的**子类对象**，也就是说抽象类也能被当做父类来使用
+
+  - 抽象类一般只用作继承使用，当然，抽象类的子类也可以是一个抽象类
+
+- 抽象类的定义其实和普通类的定义是一致的，只是在定义时，要添加 `abstract` 关键字，表示这是一个抽象类，不能直接创建对象
+
+```java
+public abstract class Person {   //通过添加abstract关键字，表示这个类是一个抽象类
+    protected String name;   //大体内容其实普通类差不多
+    protected int age;
+    protected String sex;
+    protected String profession;
+
+    protected Person(String name, int age, String sex, String profession) {
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+        this.profession = profession;
+    }
+
+    public abstract void exam();   //抽象类中可以具有抽象方法，也就是说这个方法只有定义，没有方法体
+}
+```
+
+
+#### 3.6 接口
+
+- 接口甚至比抽象类还抽象，他只代表某个确切的功能！也就是只包含方法的定义，甚至都不是一个类！
+
+- 接口一般只代表某些功能的抽象，接口包含了一些列方法的定义，类可以实现这个接口，表示类支持接口代表的功能
+
+- 在 IDEA 中创建一个接口
+
+![a_3_13](../images/a_3_13.png)
+![a_3_14](../images/a_3_14.png)
+
+
+```java
+public interface Study {    // 使用interface表示这是一个接口
+    void study();    // 接口中只能定义访问权限为public抽象方法，其中public和abstract关键字可以省略
+}
+```
+
+- 可以让类实现这个接口
+
+```java
+public class Student extends Person implements Study {   //使用implements关键字来实现接口
+    public Student(String name, int age, String sex) {
+        super(name, age, sex, "学生");
+    }
+
+    @Override
+    public void study() {    //实现接口时，同样需要将接口中所有的抽象方法全部实现
+        System.out.println("我会学习！");
+    }
+}
+```
+
+- 接口不同于继承，接口可以同时实现多个：
+
+```java
+public class Student extends Person implements Study, A, B, C {  //多个接口的实现使用逗号隔开
+  
+}
+```
+
+- `@Override` 是 Java 的一个 注解，用于表示一个方法是重写父类的方法，而不是定义一个新的方法
+
+  - 不是必须的，但强烈建议写
+
+- 两个作用：
+
+  - 告诉编译器 ：请帮我检查，我下面这个方法是不是真的重写了父类/接口的方法
+
+  - 可读性 ：让别人一眼看出这是"重写的方法"，不是新方法
+
+- 接口同样支持向下转型
+
+```java
+public static void main(String[] args) {
+    Study study = new Teacher("小王", 27, "男");
+    if(study instanceof Teacher) {   // 直接判断引用的对象是不是Teacher类型
+        Teacher teacher = (Teacher) study;   // 强制类型转换
+        teacher.study();
+    }
+}
+```
+
+::: tip
+- 接口里可以定义多个方法，但是在实现接口时，必须实现接口中所有的方法，否则会报错
+
+```java
+public interface Study {
+    void study();
+    void takeExam();
+    void submitHomework();
+}
+
+public class Student implements Study {
+    @Override
+    public void study() {
+        System.out.println("我会学习！");
+    }
+
+    @Override
+    public void takeExam() {
+        System.out.println("我会考试！");
+    }
+
+    @Override
+    public void submitHomework() {
+        System.out.println("我会交作业！");
+    }
+}
+```
+:::
+
+::: tip
+- 接口不同于类，正常情况下，接口中不允许存在成员变量和成员方法，它是一个非常纯粹的定义，所以它相比抽象类来说还要更抽象
+
+- 不过和类一样，接口是可以继承自其他接口的
+
+```java
+public interface A exetnds B {
+  
+}
+```
+```java
+public interface A exetnds B, C, D {
+  
+}
+```
+:::
+
+- Object类中提供的克隆接口 `Cloneable()`
+
+```java
+package java.lang;
+
+public interface Cloneable {    //这个接口中什么都没定义
+}
+```
+
+- 尝试实现 `Cloneable` 接口
+
+::: code-group
+```java [Main]
+import com.test.*;   //使用import关键字导入其他包中的类
+
+public class Main {
+    public static void main(String[] args) throws CloneNotSupportedException {
+        Student student = new Student("小明", 18, "男");
+
+        Student clone = (Student) student.clone();   //调用clone方法，得到一个克隆的对象
+        System.out.println(student);
+        System.out.println(clone);
+        System.out.println(student == clone);
+    }
+}
+```
+```java [Student]
+package com.test;
+
+public class Student extends Person implements Study, Cloneable {   //首先实现Cloneable接口，表示这个类具有克隆的功能
+    public Student(String name, int age, String sex) {
+        super(name, age, sex, "学生");
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {   //提升clone方法的访问权限
+        return super.clone();   //因为底层是C++实现，我们直接调用父类的实现就可以了
+    }
+
+    @Override
+    public void study() {
+        System.out.println("我会学习！");
+    }
+}
+```
+
+- 该拷贝方式是**浅拷贝**，只拷贝了对象的引用，而不是对象的内容
+:::
+
+
+#### 3.7 Java8 接口默认和静态方法
+
+- 从Java8开始，接口中可以存在方法的默认实现：
+
+```java
+public interface Study {
+    void study();
+
+    default void test() {   // 使用default关键字为接口中的方法添加默认实现
+        System.out.println("我是默认实现");
+    }
+}
+```
+- 如果方法在接口中存在默认实现，那么实现类中不强制要求进行实现
+
+- 除此外，静态变量和静态方法也可以写了
+
+```java
+public interface Study {
+    public static final int a = 10;   //接口中定义的静态变量可以是public static final的
+  
+  	public static void test(){    //接口中定义的静态方法只能是public的
+        System.out.println("我是静态方法");
+    }
+    
+    void study();
+}
+```
+
+- 跟普通的类一样，可以直接通过 `接口名.` 的方式使用静态内容： `Study.a` 或 `Study.test()`
+
+
+#### 3.8 Java9 接口中的 private 方法
+
+- 有些时候可能希望接口中有一些不愿意暴露出去的私有实现，比如：
+
+```java
+interface Study {
+    default void study() {
+        System.out.println("我要狠狠学习");
+        inner();
+        inner2();
+    }
+    private void inner() {   // Java 9开始支持使用private声明了，仅供接口内部使用
+        System.out.println("我是私有的内部实现，不要让外部直接访问我，我不想让别人知道我私底下怎么学习的");
+    }
+
+    private static void inner2() {
+        System.out.println("我是私有的内部实现，不要让外部直接访问我，我不想让别人知道我私底下怎么学习的");
+    }
+}
+```
+
+
+### 四、其他类型
+
+
+#### 4.1 枚举类型
 
 
 
