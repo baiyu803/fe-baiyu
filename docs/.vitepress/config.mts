@@ -479,7 +479,10 @@ export default defineConfig({
             { text: '前置准备', link: '/full-stack/a_javase/01_basic' },
             { text: '面向过程编程', link: '/full-stack/a_javase/02_procedure_basic' },
             { text: '面向对象基础', link: '/full-stack/a_javase/03_object-oriented_basic' },
-            { text: '面向对象高级', link: '/full-stack/a_javase/04_object-oriented_advanced' }
+            { text: '面向对象高级', link: '/full-stack/a_javase/04_object-oriented_advanced' },
+            { text: '泛型程序设计', link: '/full-stack/a_javase/05_generic' },
+            { text: '集合类与IO', link: '/full-stack/a_javase/06_collection' },
+            { text: '多线程与反射', link: '/full-stack/a_javase/07_thread_reflection' },
           ]
         }
       ],
