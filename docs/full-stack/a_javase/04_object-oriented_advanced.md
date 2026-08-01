@@ -1172,23 +1172,216 @@ public static void main(String[] args) {
 - 断言表达式一般**只用于测试**，正常的程序中一般不会使用，这里只做了解
 
 
+### 六、常用工具类介绍
+
+- 工具类一般都会内置大量的静态方法，可以通过类名直接使用
+
+#### 6.1 数学工具类 `Math`
+
+- `Math` 也是 java.lang 包下的类，所以说默认就可以直接使用
+
+```java
+public static void main(String[] args) {
+    System.out.println(Math.pow(5, 3));   // 使用pow方法直接计算a的b次方
+  
+  	Math.abs(-1);    // abs方法可以求绝对值
+  	Math.max(19, 20);    // 快速取最大值
+  	Math.min(2, 4);   // 快速取最小值
+  	Math.sqrt(9);    // 求一个数的算术平方根
+    Math.ceil(4.5);    // 通过使用ceil来向上取整
+    Math.floor(5.6);   // 通过使用floor来向下取整
+    Math.cos(Math.PI);       // 求π的余弦值
+    // ...
+}
+```
+
+- 随机数的生成
+
+```java
+public static void main(String[] args) {
+    Random random = new Random();   // 创建Random对象
+    for (int i = 0; i < 30; i++) {
+        System.out.print(random.nextInt(100)+" ");  // nextInt()方法可以指定创建0 - x之内的随机数
+    }
+}
+```
+
+#### 6.2 数组工具类 `Arrays`
+
+- `Arrays` 类是 java.util 包下的类，默认就可以直接使用
+
+- 它用于便捷操作数组，比如排序、搜索、填充等
+
+::: code-group
+```java [例子一]
+public static void main(String[] args) {
+    int[] arr = new int[]{1, 4, 5, 8, 2, 0, 9, 7, 3, 6};
+    System.out.println(arr);  // 这里输出的是数组地址，[I@27716f4
+    Arrays.sort(arr);    // 可以对数组进行排序，将所有的元素按照从小到大的顺序排放
+    System.out.println(Arrays.toString(arr));    // 可以将数组转换为字符串 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+```
+```java [例子二]
+public static void main(String[] args) {
+    int[] arr = new int[10];
+    Arrays.fill(arr, 66);  // 对数组进行填充，将所有的元素都设置为指定的值
+    System.out.println(Arrays.toString(arr));  // [66, 66, 66, 66, 66, 66, 66, 66, 66, 66]
+}
+```
+```java [例子三]
+public static void main(String[] args) {
+    int[] arr = new int[]{1, 2, 3, 4, 5};
+    int[] target = Arrays.copyOf(arr, 5);
+    System.out.println(Arrays.toString(target));   // 拷贝数组的全部内容，并生成一个新的数组对象
+    System.out.println(arr == target);  // false
+
+    int[] target1 = Arrays.copyOfRange(arr, 3, 5);   // 也可以只拷贝某个范围内的内容
+    System.out.println(Arrays.toString(target1));  // [4, 5]
+}
+```
+```java [例子四]
+public static void main(String[] args) {
+    int[] arr = new int[]{1, 2, 3, 4, 5};
+    int[] target = new int[10];
+    System.arraycopy(arr, 0, target, 0, 5);   // 使用System.arraycopy进行搬运，将一个数组中的内容拷贝到其他数组中
+    System.out.println(Arrays.toString(target));  // [1, 2, 3, 4, 5, 0, 0, 0, 0, 0]
+}
+```
+:::
+
+- 对于多维数组，又是写新的静态方法
+
+```java
+public static void main(String[] args) {
+    int[][] array = new int[][]{{2, 8, 4, 1}, {9, 2, 0, 3}};
+    System.out.println(Arrays.toString(array));  // [[I@27716f4, [I@27716f5]
+
+    System.out.println(Arrays.deepToString(array));    // deepToString方法可以对多维数组进行打印, [[2, 8, 4, 1], [9, 2, 0, 3]]
+}
+```
+
+- 因为数组本身没有重写 equals 方法，所以 Arrays 类也为一维数组和多维数组提供了相等判断的方法
+
+  - 这里对比的是两个不同的数组对象中的每一个元素是否相同
+
+```java
+public static void main(String[] args) {
+    int[][] a = new int[][]{{2, 8, 4, 1}, {9, 2, 0, 3}};
+    int[][] b = new int[][]{{2, 8, 4, 1}, {9, 2, 0, 3}};
+    System.out.println(Arrays.equals(a, b));   // equals仅适用于一维数组, false
+    System.out.println(Arrays.deepEquals(a, b));   // 对于多维数组，需要使用deepEquals来进行深层次判断, true
+}
+```
+
+#### 6.3 日期相关类 `Calendar` 和 `Date`
+
+- 先看 `Date` 类，它是一个表示日期和时间的类，它的构造方法是 `Date()`
+
+```java
+public static void main(String[] args) {
+    Date date = new Date();
+    System.out.println(date);   // Sat Aug 01 20:41:18 CST 2026
+    System.out.println(date.getTime());   // 1722424478000, 单位是毫秒
+
+    Date date = new Date(125, 7, 1, 12, 0, 0);  // 直接设置年月日时分秒，其中年是相对于1900年，月份从0开始
+    System.out.println(date);
+}
+```
+
+- 其他诸如获取年份、月份、日期等方法，均被标记为过时，它门都指向了一个新的类 —— `Calendar`类
+
+  - 它用于**在日期和时间字段之间进行转换**，提供了大量实用方法，相比直接使用Date来说，会方便不少
 
 
+```java
+Calendar instance = Calendar.getInstance();
+instance.setTime(new Date());  //实际上默认情况下不设定也是当前时间
+```
+
+::: tip
+- 了解就行，这些日期工具还是太难用了，在现代化的今天显得很鸡肋，下一部分会介绍 Java8 带来的全新日期类和工具
+:::
 
 
+#### 6.4 Java8 新的日期类
+
+- 主要包括以下几个核心类，它们都位于 `java.time` 包中，旨在解决旧版 `java.util.Date` 和 `java.util.Calendar` 设计上的不足
+
+- Java8 提供了几种全新的日期类型：
+
+  - `LocalDate`： 表示没有时间部分的日期（年、月、日）例如：2024-04-27
+  
+  - `LocalTime`： 表示没有日期部分的时间（时、分、秒、纳秒）例如：14:30:00
+  - `LocalDateTime`： 表示日期和时间的组合（没有时区信息）例如：2024-04-27T14:30:00
+  - `ZonedDateTime`： 表示带有时区的日期和时间，例如：2024-04-27T14:30:00+08:00[Asia/Shanghai]
 
 
+- 先看 `LocalDate` 类
+```java
+public static void main(String[] args) {
+    LocalDate date = LocalDate.now();  // 需要使用其内部的静态方法创建对象，2026-08-01
+    LocalDate date1 = LocalDate.of(2026, 10, 11);  // 按年月日创建所见即所得，2026-10-11
+    LocalDate date2 = LocalDate.of(2026, Month.AUGUST, 18);   // 同上，按年月日创建，2026-08-18
+    LocalDate date3 = LocalDate.ofYearDay(2026, 240);   // 直接取2026年的第240天，2026-09-01
+}
+```
+- 使用 `now()` 方法可以立即创建一个代表当前时间的LocalDate对象，其中包含了很多关于日期的工具方法
 
+```java
+System.out.println("月份: " + date.getMonth());  // AUGUST
+System.out.println("月份数字: " + date.getMonthValue());  // 8
+System.out.println("年份: " + date.getYear());  // 2026
+System.out.println("今年的第几天: " + date.getDayOfYear());  // 213
+System.out.println("这个月的第几天: " + date.getDayOfMonth());  // 1
+System.out.println("这周的第几天: " + date.getDayOfWeek());  // SATURDAY
+```
 
+- 日期也能进行加减操作，例如：`LocalDate date4 = date.plusDays(1);`，表示将当前日期加一天，得到2026-08-02
 
+- 在看 `LocalTime` 类
 
+```java
+LocalTime time = LocalTime.now();   // 现在的时间, 20:54:25.671473
+LocalTime time1 = LocalTime.of(12, 30);   // 指定时分, 12:30
 
+System.out.println("小时: " + time.getHour());  // 20
+System.out.println("分钟: " + time.getMinute());  // 54
+System.out.println("秒: " + time.getSecond());  // 25
+```
 
+- 接着来看 `LocalDate` 和 `LocalTime`的结合体，`LocalDateTime` 包含了完整的时间信息
 
+  - LocalDateTime 包含了 LocalDate 和 LocalTime 内的所有方法
 
+```java
+LocalDateTime time = LocalDateTime.now();
+LocalDateTime time2 = LocalDateTime.of(LocalDate.now(), LocalTime.now()); // 融合两个对象，2026-08-01T20:56:48.792239
+LocalDateTime time3 = LocalDateTime.of(2025, 10, 1, 23, 18, 0);  // 年月日时分秒，2025-10-01T23:18
 
+System.out.println(time2.getHour());  // 20
+```
 
+- 对于时间的格式化，Java 8也提供了一个全新的 `DateTimeFormatter` 类：
 
+```java
+// 首先创建日期格式化工具
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+// 使用parse指定格式进行转换
+LocalDateTime now = LocalDateTime.parse("2025-01-01 01:18:22", formatter);
+System.out.println(now);  // 2025-01-01T01:18:22
+```
+
+- 如果要把日期转换为格式化的字符串，直接使用format方法即可
+
+```java
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+System.out.println(formatter.format(LocalDateTime.now()));
+```
+
+::: tip
+还有很多日期类，比如带偏移值的日期类 `OffsetDateTime` ，带时区信息的日期对象类 `ZonedDateTime` 等
+:::
 
 
 
