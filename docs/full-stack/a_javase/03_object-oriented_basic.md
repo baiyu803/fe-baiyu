@@ -943,8 +943,127 @@ public class Student extends Person implements Study, Cloneable {   //首先实�
 - 该拷贝方式是**浅拷贝**，只拷贝了对象的引用，而不是对象的内容
 :::
 
+#### 3.7 类的多态
 
-#### 3.7 Java8 接口默认和静态方法
+- 一句话总结：**同一个行为，不同对象有不同实现。父类引用指向子类对象，调用方法时执行子类重写后的逻辑**
+
+- 三个核心要素（缺一不可）
+
+  - 继承 / 实现：子类继承父类，或类实现接口
+
+  - 方法重写：子类重写父类方法
+  - 父类引用指向子类对象
+
+::: code-group
+```java [类多态]
+// 父类
+class Animal {
+    public void shout() {
+        System.out.println("动物叫");
+    }
+}
+
+// 子类1
+class Dog extends Animal {
+    @Override
+    public void shout() {
+        System.out.println("汪汪汪");
+    }
+}
+
+// 子类2
+class Cat extends Animal {
+    @Override
+    public void shout() {
+        System.out.println("喵喵喵");
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        // 多态写法：父类引用指向子类实例
+        Animal a1 = new Dog();
+        Animal a2 = new Cat();
+
+        a1.shout(); // 汪汪汪（执行子类Dog方法）
+        a2.shout(); // 喵喵喵（执行子类Cat方法）
+    }
+}
+```
+```java [接口多态]
+interface USB {
+    void work();
+}
+class Mouse implements USB{
+    @Override
+    public void work(){}
+}
+class KeyBoard implements USB{
+    @Override
+    public void work(){}
+}
+
+USB usb = new Mouse(); // 接口多态
+```
+:::
+
+- 重点：编译看左边（父类有没有这个方法），运行看右边（实际对象是哪个类，执行哪个类重写方法）
+
+::: tip
+- 方法：支持多态
+
+    - 运行时动态绑定，执行子类重写方法
+
+- 成员变量：不支持多态
+
+    - 变量编译、运行全都看左边引用类型
+
+```java
+class Animal{
+    String name = "动物";
+}
+class Dog extends Animal{
+    String name = "小狗";
+}
+
+Animal a = new Dog();
+System.out.println(a.name); // 输出：动物，不触发多态
+```
+
+- 静态方法：没有多态
+
+    - 静态方法属于类，编译绑定，不存在动态绑定
+:::
+::: info
+- 向上转型（自动，多态基础）
+
+    - `Animal a = new Dog();`
+
+    - 父类引用指向子类对象，调用父类方法时，执行的是父类的方法
+
+    - 优点：通用编程
+    
+    - 缺点：不能直接调用子类独有的方法
+
+- 向下转型
+
+    - 强制，必须先向上转型，否则报ClassCastException
+
+```java
+Animal a = new Dog();
+Dog dog = (Dog) a;
+dog.watchHouse(); // 调用Dog独有方法
+
+// 安全写法搭配 instanceof 判断：
+if (a instanceof Dog) {
+    Dog dog = (Dog) a;
+    dog.watchHouse(); // 调用Dog独有方法
+}
+```
+:::
+
+
+#### 3.8 Java8 接口默认和静态方法
 
 - 从Java8开始，接口中可以存在方法的默认实现：
 
@@ -976,7 +1095,7 @@ public interface Study {
 - 跟普通的类一样，可以直接通过 `接口名.` 的方式使用静态内容： `Study.a` 或 `Study.test()`
 
 
-#### 3.8 Java9 接口中的 private 方法
+#### 3.9 Java9 接口中的 private 方法
 
 - 有些时候可能希望接口中有一些不愿意暴露出去的私有实现，比如：
 
