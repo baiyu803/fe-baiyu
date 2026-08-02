@@ -482,8 +482,9 @@ export default defineConfig({
             { text: '面向对象高级', link: '/full-stack/a_javase/04_object-oriented_advanced' },
             { text: '泛型程序设计', link: '/full-stack/a_javase/05_generic' },
             { text: '数据结构基础', link: '/full-stack/a_javase/06_0_data_structure' },
-            { text: '集合类与IO', link: '/full-stack/a_javase/06_collection' },
-            { text: '多线程与反射', link: '/full-stack/a_javase/07_thread_reflection' },
+            { text: '集合类', link: '/full-stack/a_javase/06_collection' },
+            { text: 'IO', link: '/full-stack/a_javase/07_io' },
+            { text: '多线程与反射', link: '/full-stack/a_javase/08_thread_reflection' },
           ]
         }
       ],
