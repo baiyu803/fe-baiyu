@@ -1171,6 +1171,138 @@ Set<String> fruitSet = Set.of("apple", "banana", "orange");
 - 自行了解
 
 
+### 十二、Java8 Stream 流
+
+- `java.util.stream.Stream` 是 Java 8 引入的集合数据处理框架，以 ***声明式、链式调用*** 的方式完成过滤、映射、排序、聚合等操作
+
+- 核心特性
+
+  - **惰性求值**：流操作不会立即执行，直到调用最后一步 `forEach` 或 `collect` 等终端操作方法时，整个流水线才开始运作
+
+  - **不修改源数据**：所有操作都基于新的流进行，不会改动原始集合
+
+  - **一次性消费**：执行终端操作后流自动关闭，无法重复调用
+
+  - **支持并行处理**：通过 `parallelStream` 方法创建并行流，可以自动利用多核处理器的并行计算能力
+
+#### 12.1 流常见创建方式
+
+- 从集合创建
+
+```java
+List<String> list = Arrays.asList("a", "b", "c");
+// 串行流
+Stream<String> stream = list.stream();
+// 并行流
+Stream<String> parallelStream = list.parallelStream();
+```
+- 从数组创建
+
+```java
+int[] array = {1, 2, 3, 4, 5};
+// 串行流
+Stream<Integer> stream = Arrays.stream(array);
+// 并行流
+Stream<Integer> parallelStream = Arrays.stream(array).parallel();
+
+Stream<String> stream2 = Stream.of("a", "b", "c");
+```
+- 生成无限流（构造测试数据）
+
+```java
+// 生成无限个随机数
+Stream<Double> randomStream = Stream.generate(Math::random);
+// 按规则迭代生成序列：从0开始，每次+2
+Stream<Integer> iterateStream = Stream.iterate(0, n -> n + 2);
+```
+
+- 空流
+
+```java
+Stream<String> emptyStream = Stream.empty();
+```
+
+#### 12.2 核心中间操作
+
+- 中间操作返回新的 Stream 对象，支持链式拼接，本身不会触发执行
+
+- 筛选与截断
+
+| 方法 | 作用 |
+| --- | --- |
+| filter(Predicate) | 按条件过滤，只保留满足条件的元素 |
+| distinct() | 元素去重，依赖 equals() 和 hashCode() |
+| limit(long n) | 截取前 n 个元素，短路操作（拿到足够元素就停止） |
+| skip(long n) | 跳过前 n 个元素 |
+
+
+```java
+import java.util.*;
+
+
+public static void main(String[] args) {
+    List<Integer> list = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7);
+    List<Integer> result = list.stream()
+            .filter(num -> num >= 2) // 过滤
+            .distinct()                          // 去重
+            .skip(1)                             // 跳过第1个
+            .limit(2)                            // 取前2个
+            .collect(Collectors.toList());      // 收集结果，转换为列表集合
+
+    System.out.println(result);   // [3, 4]
+    System.out.println(list);     // [0, 1, 2, 3, 4, 5, 6, 7]
+}
+```
+
+- 映射转换
+
+  - `map(Function)`： 对每个元素应用函数，返回新的元素 
+
+  - `flatMap(Function)`： 对每个元素应用函数，返回新的流，支持链式调用 
+
+
+- 排序
+
+  - `sorted()`： 对元素进行自然排序（依赖 Comparable 接口）
+
+  - `sorted(Comparator comparator)`： 对元素进行自定义排序（依赖 Comparator 接口）
+
+```java
+List<User> sortedList = userList.stream()
+        .sorted(Comparator
+                .comparingInt(User::getAge).reversed()
+                .thenComparingLong(User::getId)
+        )
+        .collect(Collectors.toList());
+```
+
+- 中间调试，仅执行副作用，比如打印日志
+
+```java
+List<String> result = userList.stream()
+        .map(User::getName)
+        .peek(name -> System.out.println("映射后：" + name)) // 调试打印
+        .filter(name -> name.length() > 2)
+        .forEach(System.out::println);
+```
+
+#### 12.3 核心终端操作
+
+- 终端操作触发流的执行，返回最终的结果或结果集合
+
+- 有很多种终端操作方法，比如
+
+  - 遍历与匹配：`forEach`、`anyMatch`、`allMatch`、`noneMatch`、`findFirst`、`findAny` 等
+
+  - 聚合与归纳：`count`、`reduce`、`min`、`max`等
+
+  - 手机操作： `collect` (用的最多)
+
+::: tip
+- 流操作是一个个处理元素的
+
+![a_6_4](../images/a_6_4.png)
+:::
 
 
 
