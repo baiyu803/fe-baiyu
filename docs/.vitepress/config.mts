@@ -484,7 +484,8 @@ export default defineConfig({
             { text: '数据结构基础', link: '/full-stack/a_javase/06_0_data_structure' },
             { text: '集合类', link: '/full-stack/a_javase/06_collection' },
             { text: 'IO', link: '/full-stack/a_javase/07_io' },
-            { text: '多线程与反射', link: '/full-stack/a_javase/08_thread_reflection' },
+            { text: '多线程', link: '/full-stack/a_javase/08_thread' },
+            { text: '反射与注释', link: '/full-stack/a_javase/09_annotation_reflection' },
           ]
         }
       ],
