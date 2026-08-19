@@ -487,6 +487,24 @@ export default defineConfig({
             { text: '多线程', link: '/full-stack/a_javase/08_thread' },
             { text: '反射与注释', link: '/full-stack/a_javase/09_annotation_reflection' },
           ]
+        },
+        {
+          text: 'JUC 并发编程',
+          collapsed: true,
+          items: [
+            { text: '再谈多线程', link: '/full-stack/b_juc/01_thread' },
+            { text: '并发线程核心', link: '/full-stack/b_juc/02_thread_core' },
+            { text: '并发线程进阶', link: '/full-stack/b_juc/03_thread_advanced' },
+          ]
+        },
+        {
+          text: '常用知识',
+          collapsed: true,
+          items: [
+            { text: 'Maven 快速上手', link: '/full-stack/e_common/01_maven_quick_start' },
+            { text: 'Mybatis 快速上手', link: '/full-stack/e_common/02_mybatis_quick_start' },
+            { text: 'Lombok 快速上手', link: '/full-stack/e_common/03_lombok_quick_start' },
+          ]
         }
       ],
       '/ai-relate/': [
