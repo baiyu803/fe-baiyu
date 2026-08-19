@@ -338,7 +338,472 @@ public static void main(String[] args) {
 - **优先级越高的线程，获得CPU资源的概率会越大，并不是说一定优先级越高的线程越先执行**
 
 
+### 六、线程的礼让和加入
 
+*   使用 `yield()` 方法来将当前资源让位给其他同优先级线程
+
+```java
+public static void main(String[] args) {
+    Thread t1 = new Thread(() -> {
+        System.out.println("线程1开始运行！");
+        for (int i = 0; i < 50; i++) {
+            if(i % 5 == 0) {
+                System.out.println("让位！");
+                Thread.yield();
+            }
+            System.out.println("1打印："+i);
+        }
+        System.out.println("线程1结束！");
+    });
+    Thread t2 = new Thread(() -> {
+        System.out.println("线程2开始运行！");
+        for (int i = 0; i < 50; i++) {
+            System.out.println("2打印："+i);
+        }
+    });
+    t1.start();
+    t2.start();
+}
+```
+
+*   会发现，在让位之后，尽可能多的在执行线程2的内容
+
+*   使用 `join()` 方法来实现线程的加入
+
+    *   等待加入线程执行完毕，继续执行当前线程
+
+```java
+public static void main(String[] args) {
+    Thread t1 = new Thread(() -> {
+        System.out.println("线程1开始运行！");
+        for (int i = 0; i < 50; i++) {
+            System.out.println("1打印："+i);
+        }
+        System.out.println("线程1结束！");
+    });
+    Thread t2 = new Thread(() -> {
+        System.out.println("线程2开始运行！");
+        for (int i = 0; i < 50; i++) {
+            System.out.println("2打印："+i);
+            if(i == 10){
+                try {
+                    System.out.println("线程1加入到此线程！");
+                    t1.join();    //在i==10时，让线程1加入，先完成线程1的内容，在继续当前内容
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    });
+    t1.start();
+    t2.start();
+}
+```
+
+*   会发现，一开始两线程交叉执行，在线程2的第10次打印后，线程1加入到线程2，线程2会等待线程1执行完毕，再继续执行自己的内容
+
+### 七、线程锁和线程同步
+
+*   Java 是多线程的，多线程并发访问共享资源时，会存在线程安全问题，需要使用线程锁来解决线程安全问题
+
+*   比如下面这个代码
+
+```java
+private static int value = 0;
+
+public static void main(String[] args) throws InterruptedException {
+    Thread t1 = new Thread(() -> {
+        for (int i = 0; i < 10000; i++) value++;
+        System.out.println("线程1完成");
+    });
+    Thread t2 = new Thread(() -> {
+        for (int i = 0; i < 10000; i++) value++;
+        System.out.println("线程2完成");
+    });
+    t1.start();
+    t2.start();
+    Thread.sleep(1000);  //主线程停止1秒，保证两个线程执行完成
+    System.out.println(value);
+}
+```
+
+*   `value++` 不是原子操作，分为三步
+    *   从内存中读取 value 值
+    *   增加 value 值
+    *   再将 value 值写入内存中
+
+*   两个线程同时操作共享变量，会发生指令交错，覆盖写，出现线程安全问题，结果几乎跑不出 20000
+
+*   通过 `synchronized` 关键字来创造一个线程锁，来解决线程安全问题
+
+    *   `synchronized` 关键字可以将方法或代码块变成一个线程锁，当一个线程执行到这个方法或代码块时，其他线程就不能执行这个方法或代码块，直到当前线程执行完毕，才会释放锁
+
+    *   接受一个参数，必须是一个对象或一个类，只有传入的是同一个对象或同一个类，才会创建同一个锁，否则会创建多个不同的锁
+
+```java
+private static int value = 0;
+
+public static void main(String[] args) throws InterruptedException {
+    Thread t1 = new Thread(() -> {
+        for (int i = 0; i < 10000; i++) {
+            synchronized (Main.class){  // 使用synchronized关键字创建同步代码块
+                value++;
+            }
+        }
+        System.out.println("线程1完成");
+    });
+    Thread t2 = new Thread(() -> {
+        for (int i = 0; i < 10000; i++) {
+            synchronized (Main.class){
+                value++;
+            }
+        }
+        System.out.println("线程2完成");
+    });
+    t1.start();
+    t2.start();
+    Thread.sleep(1000);  // 主线程停止1秒，保证两个线程执行完成
+    System.out.println(value);
+}
+```
+
+*   会发现，结果是 20000，线程安全问题得到了解决
+
+*   `synchronized` 关键字也可以作用于方法上，调用此方法时也会获取锁
+
+```java
+private static int value = 0;
+
+private static synchronized void add(){
+    value++;
+}
+
+public static void main(String[] args) throws InterruptedException {
+    Thread t1 = new Thread(() -> {
+        for (int i = 0; i < 10000; i++) add();
+        System.out.println("线程1完成");
+    });
+    Thread t2 = new Thread(() -> {
+        for (int i = 0; i < 10000; i++) add();
+        System.out.println("线程2完成");
+    });
+    t1.start();
+    t2.start();
+    Thread.sleep(1000);  // 主线程停止1秒，保证两个线程执行完成
+    System.out.println(value);
+}
+```
+
+*   还有**死锁**的概念，当两个线程以上在等待对方释放资源时，就会发生死锁，死锁会导致程序无法继续执行，需要手动解决
+
+```java
+public static void main(String[] args) throws InterruptedException {
+    Object o1 = new Object();
+    Object o2 = new Object();
+    Thread t1 = new Thread(() -> {
+        synchronized (o1){
+            try {
+                Thread.sleep(1000);
+                synchronized (o2){
+                    System.out.println("线程1");
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    });
+    Thread t2 = new Thread(() -> {
+        synchronized (o2){
+            try {
+                Thread.sleep(1000);
+                synchronized (o1){
+                    System.out.println("线程2");
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    });
+    t1.start();
+    t2.start();
+}
+```
+
+### 八、 wait 和 notify 方法
+
+*   `Object` 类还有三个方法从来没有使用过，分别是 `wait()`、`notify()`以及`notifyAll()`
+
+*   他们是需要配合 `synchronized` 关键字来使用的
+
+    *   实际上锁就是依附于对象存在的，每个对象都应该有针对于锁的一些操作，所以说就这样设计了
+
+    *   只有在同步代码块中才能使用这些方法，正常情况下会报错
+
+*   `wait()` 方法是使当前线程进入等待状态，等待其他线程调用 `notify()` 或 `notifyAll()` 方法来唤醒它
+
+*   `notify()` 方法是随机唤醒一个等待的线程
+
+*   `notifyAll()` 方法是唤醒所有等待的线程
+
+```java
+public static void main(String[] args) throws InterruptedException {
+    Object o1 = new Object();
+    Thread t1 = new Thread(() -> {
+        synchronized (o1){
+            try {
+                System.out.println("开始等待");
+                o1.wait();     // 进入等待状态并释放锁
+                System.out.println("等待结束！");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    });
+    Thread t2 = new Thread(() -> {
+        synchronized (o1){
+            System.out.println("开始唤醒！");
+            o1.notify();     // 随机唤醒处于等待状态的线程
+          	System.out.println("继续执行 1");
+            System.out.println("继续执行 2");
+          	// 唤醒后依然需要等待这里的锁释放之前等待的线程才能继续
+        }
+    });
+    t1.start();
+    Thread.sleep(1000);
+    t2.start();
+}
+```
+
+![a_8_2](../images/a_8_2.png)
+
+### 九、ThreadLocal 使用
+
+*   每个线程都有一个自己的工作内存，可以通过 `ThreadLocal` 类在工作内存中创建变量仅线程自己使用
+
+*   只能创建一个变量，不同的线程访问到 `ThreadLocal` 对象时，都只能获取到当前线程所属的变量
+
+```java
+public static void main(String[] args) throws InterruptedException {
+    ThreadLocal<String> local = new ThreadLocal<>();  // 注意这是一个泛型类，存储类型为我们要存放的变量类型
+    Thread t1 = new Thread(() -> {
+        local.set("lbwnb");   // 将变量的值给予ThreadLocal
+        System.out.println("变量值已设定！");
+        System.out.println(local.get());   // 尝试获取ThreadLocal中存放的变量，是 lbwnb
+    });
+    Thread t2 = new Thread(() -> {
+        System.out.println(local.get());   // 尝试获取ThreadLocal中存放的变量，是 null
+    });
+    t1.start();
+    Thread.sleep(3000);    // 间隔三秒
+    t2.start();
+}
+```
+
+*   即使 t2 线程也创建自己的变量，也不会影响 t1 线程的变量
+
+*   使用 `ThreadLocal` 创建的变量，在父线程中设置，子线程中无法获取到这个变量，只能通过 `InheritableThreadLocal` 来实现
+
+    *   在 `InheritableThreadLocal` 中存放的内容，会自动向子线程传递
+
+```java
+public static void main(String[] args) {
+    ThreadLocal<String> local = new InheritableThreadLocal<>();
+    Thread t = new Thread(() -> {
+       local.set("lbwnb");
+        new Thread(() -> {
+            System.out.println(local.get());    // lbwnb
+        }).start();
+    });
+    t.start();
+}
+```
+
+### 十、定时器
+
+*   可以使用线程自定义一个定时器类，但是 Java 提供了一个 `Timer` 类，可以直接用来实现定时器的功能
+
+```java
+import java.util.Timer;
+import java.util.TimerTask;
+
+public static void main(String[] args) {
+    Timer timer = new Timer();    // 创建定时器对象
+    timer.schedule(new TimerTask() {   // 注意这个是一个抽象类，不是接口，无法使用lambda表达式简化，只能使用匿名内部类
+        @Override
+        public void run() {
+            System.out.println(Thread.currentThread().getName());    // 打印当前线程名称，是 Timer-0
+            System.out.println("定时器任务执行！");
+            timer.cancel();  // 结束定时器任务
+        }
+    }, 1000);    // 执行一个延时任务
+}
+```
+
+*   需要手动调用 `cancel()` 方法来结束定时器任务，否则会一直执行
+
+*   使用 `Timer` 类可以创建任意类型的定时任务，包括延时任务、循环定时任务等
+
+```java
+// 循环定时任务
+timer.scheduleAtFixedRate(new TimerTask() {
+    @Override
+    public void run() {
+        System.out.println("定时器任务执行！");
+        count++;
+        if (count >= 3) {       // 执行3次后关闭
+            timer.cancel();     // 终止定时器，丢弃所有已安排的任务
+        }
+    }
+}, 1000, 2000);    // 1秒后开始执行，每2秒执行一次
+```
+
+### 十一、守护线程
+
+*   Java 线程分两类：
+
+    *   用户线程（非守护线程，默认）：业务工作线程，JVM 必须等所有用户线程全部结束，JVM 才会退出。
+    *   守护线程（Daemon）：服务于用户线程的后台线程
+
+*   当 JVM 中所有用户线程全部结束，不管守护线程还跑不跑，JVM 直接退出，守护线程会被粗暴终止，不会正常执行完
+
+```java
+public static void main(String[] args) throws InterruptedException{
+    Thread t = new Thread(() -> {
+        while (true){
+            try {
+                System.out.println("程序正常运行中...");
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    });
+    t.setDaemon(true);   // 设置为守护线程（必须在开始之前，中途是不允许转换的）
+    t.start();
+    for (int i = 0; i < 5; i++) {
+        Thread.sleep(1000);
+    }
+}
+```
+
+*   `setDaemon(true)` 必须在线程start()之前，start 之后调用会抛出 `IllegalThreadStateException`
+
+*   main 主线程是用户线程，默认不是守护线程
+
+    *   比如上面的，如果不设置守护线程，Main 执行完后，线程会继续执行，会一直输出 "程序正常运行中..."
+
+    *   但是，如果设置守护线程，守护线程，JVM 会直接退出，不会等待守护线程执行完，会直接终止守护线程
+
+::: tip
+
+*   守护线程**不能保证资源释放、不能保证 finally 执行完毕**。JVM 退出是直接粗暴终止，不会等待守护线程执行完逻辑
+
+*   GC 垃圾回收线程：典型守护线程。应用所有业务线程结束，GC 就没必要继续跑，JVM 直接退出
+
+*   实际业务开发什么时候用守护线程？
+
+    *   业务代码极少自己手动创建守护线程！大部分业务线程都要用用户线程
+
+    *   适合守护线程场景：允许程序退出时直接丢弃，不需要保证做完。
+
+        *   比如：日志线程、定时器线程、垃圾回收线程等
+            :::
+
+### 十二、再谈集合类
+
+*   因为多线程的加入，之前认识的集合类都废掉了
+
+```java
+public static void main(String[] args) throws InterruptedException {
+    List<Integer> list = new ArrayList<>();
+    new Thread(() -> {
+        for (int i = 0; i < 1000; i++) {
+            list.add(i);   //两个线程同时操作集合类进行插入操作
+        }
+    }).start();
+    new Thread(() -> {
+        for (int i = 1000; i < 2000; i++) {
+            list.add(i);
+        }
+    }).start();
+    Thread.sleep(2000);
+    System.out.println(list.size());
+}
+```
+
+*   因为之前的集合类，并没有考虑到多线程运行的情况，如果两个线程同时执行，那么有可能两个线程同一时间都执行同一个方法，导致集合类的不一致状态
+
+*   当然也有专用于并发编程的集合类，比如 JUC 并发集合（`java.util.concurrent`包）
+
+### 十三、JUC 并发集合类
+
+*   包路径：`java.util.concurrent.*`
+
+*   核心前提：
+    *   普通集合 `ArrayList`、`HashMap`并发修改会出现数据错乱、ConcurrentModificationException。
+
+    *   老方案 `Vector`、`Hashtable`、`Collections.synchronizedXxx`：全量 synchronized 全局锁，并发性能差，复合操作依然不安全，业务尽量不用。
+
+    *   JUC 并发集合：底层 CAS + 分段锁 / 桶锁 + COW 写时复制，单个方法原子安全，但多方法组合操作仍然需要自己保证原子性
+
+*   常用的四类
+
+    *   `ConcurrentHashMap` （最常用）
+
+    *   `CopyOnWriteArrayList`
+
+    *   `ConcurrentLinkedQueue`
+
+    *   `BlockingQueue`
+
+#### 13.1 ConcurrentHashMap
+
+*   替代 HashMap、Hashtable，多线程共享 Map 首选，本地缓存、多线程计数、共享配置
+
+*   JDK8 实现：取消分段锁，CAS + synchronized 锁单个 hash 桶；读几乎无锁；支持并发扩容；key/value 不能为 null
+
+```java
+ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<>();
+
+// 普通put，单个方法原子
+map.put("a", 1);
+Integer val = map.get("apple");
+map.remove("apple");
+
+// ✅原子API，多线程下优先用这一组
+map.putIfAbsent("a", 100);       // key不存在才存入，原子操作
+map.compute("count", (k, v) -> v + 1); // 原子更新，适合计数
+map.computeIfAbsent("user1", k -> new User()); // key不存在才执行函数初始化
+map.merge("count", 1, Integer::sum); // 合并，计数最简写法
+```
+
+*   经典坑
+
+```java
+// ❌不安全！get + put 两个独立原子方法，组合起来不是原子
+if(map.get("key") == null){
+    map.put("key", value);
+}
+
+// ✅替换为 putIfAbsent / computeIfAbsent
+map.putIfAbsent("key", value);
+```
+
+*   `putIfAbsent`：key 不存在才 put；如果 key 已经存在，不覆盖，返回旧值。原子操作
+
+    *   用来替代 `if(get==null) put()`，确保线程安全
+
+*   `computeIfAbsent`：key 不存在，执行 lambda 计算 value，再存入；存在直接返回已有 value。适合对象初始化
+
+*   `compute`：对 key 对应的 value 做更新操作，读‑改‑写整个过程原子操作
+
+*   `merge`：key不存在则直接存入1；存在则合并 sum 求和
+
+    *   参数 1：key
+
+    *   参数 2：value（key 不存在时用这个值）
+
+    *   参数 3：合并函数，key 存在时，旧值和新值怎么合并
 
 
 
