@@ -771,7 +771,8 @@ list.forEach(item -> System.out.println(item));
 ```
 
 *   但是有本质区别，js 箭头函数是函数，而 Lambda 表达式是对象，是接口实例
-    :::
+
+:::
 
 #### 4.6 方法引用
 
