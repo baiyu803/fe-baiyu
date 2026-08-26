@@ -1299,7 +1299,7 @@ List<String> result = userList.stream()
 
   - 聚合与归纳：`count`、`reduce`、`min`、`max`等
 
-  - 手机操作： `collect` (用的最多)
+  - 收集操作： `collect` (用的最多)
 
 ::: tip
 - 流操作是一个个处理元素的
