@@ -1055,6 +1055,9 @@ Collections.reverse(list); // [1, 2, 3, 4]
 // 随机打乱
 Collections.shuffle(list); // 顺序随机
 ```
+::: tip
+这些方法直接修改传入的原 List 对象，属于破坏性原地变更，不会返回新集合
+:::
 
 #### 9.2 查找、统计与极值计算
 
