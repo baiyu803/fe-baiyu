@@ -533,7 +533,7 @@ public static void main(String[] args) {
 
   - `Deque` 还能做 `Queue` 不能做的操作，比如额外支持双端增删、栈操作
 
-### 5.1 Queue 接口（单向队列，FIFO）
+#### 5.1 Queue 接口（单向队列，FIFO）
 
 - `java.util.Queue` 继承自 `Collection` 接口，遵循**先进先出（FIFO）**原则：元素从队尾入队，从队首出队
 
