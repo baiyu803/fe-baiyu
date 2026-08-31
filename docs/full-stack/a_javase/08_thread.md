@@ -263,18 +263,31 @@ t.sleep(1000); // 坑！静态方法，实际休眠main主线程，不是t
 
 #### 4.2 线程中断 interrupt
 
-- 协商式终止线程，仅设置中断标记，不强制终止线程执行
+- `interrupt()` 不是直接杀死线程，它只是给线程打一个「中断标记」，线程要不要停下来，由线程自己判断处理
 
 - 三个核心 API
 
-  - `thread.interrupt()`：给目标线程打中断标记（只是设置布尔标识，不会直接杀死线程）
+  - `thread.interrupt()`：给目标线程打中断标记（只是设置布尔标识，设置中断标志位为 true，不会直接杀死线程）
 
   - `thread.isInterrupted()`：查询线程的中断标记，不清除标记
-  - `Thread.interrupted()`：静态方法，查询当前线程中断标记，**查询后清空标记**
+  - `Thread.interrupted()`：静态方法，查询当前线程中断标记，**查询后清空标记**，把标记重置为 false
 
 - 两种中断响应机制
+  - 就是能感知线程被设置了中断，然后可以做一些操作
 
 - 第一种：线程处于阻塞态（sleep/wait/join）
+
+  - 线程状态是 **TIMED_WAITING / WAITING（阻塞休眠）**，它自己没法主动轮询判断 `isInterrupted()`
+ 
+  - 外部调用 `interrupt()`
+ 
+  - **JVM 的内置响应逻辑触发**：
+    
+    - 立刻唤醒这个阻塞的线程
+   
+    - **自动把中断标志清空（置为 false）**
+   
+    - 在阻塞方法内部抛出 `InterruptedException`
 
 ```java
 Thread t = new Thread(() -> {
@@ -282,6 +295,7 @@ Thread t = new Thread(() -> {
         Thread.sleep(10000);
     } catch (InterruptedException e) {
         // 休眠中被中断，进入这里，标记已自动重置为false
+        Thread.currentThread().interrupt();
         System.out.println("线程被中断");
     }
 });
