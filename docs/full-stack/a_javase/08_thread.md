@@ -707,7 +707,8 @@ public static void main(String[] args) throws InterruptedException{
     *   适合守护线程场景：允许程序退出时直接丢弃，不需要保证做完。
 
         *   比如：日志线程、定时器线程、垃圾回收线程等
-            :::
+
+:::
 
 ### 十二、再谈集合类
 
